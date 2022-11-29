@@ -16,6 +16,8 @@ import { Product } from "../../../types/types";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Link } from "react-router-dom";
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../../../redux/slices/cart.slice'
 
 interface Props {
   product: Product;
@@ -37,10 +39,15 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 export const CardProduct: React.FC<Props> = ({ product }) => {
   const [expanded, setExpanded] = React.useState(false);
-
+  const dispatch = useDispatch()
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  const addToCartProduct = () => {
+    const { id,brand,title,price,thumbnail,stock } = product
+    dispatch(addToCart({id,brand,title,price,thumbnail,stock,amount:1}))
+  }
 
   return (
     <Card sx={{width:{xs:"100%",sm:"300px", md:"410px"}}}>
@@ -80,7 +87,7 @@ export const CardProduct: React.FC<Props> = ({ product }) => {
         </Collapse>
         <Link to={`/detail/${product.id}`}>Detalle</Link>
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
+          <IconButton aria-label="add to cart" onClick={addToCartProduct}>
             <FavoriteIcon />
           </IconButton>
         </CardActions>

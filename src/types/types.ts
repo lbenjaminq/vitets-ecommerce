@@ -11,3 +11,13 @@ export interface Product {
   thumbnail: string;
   images: string[];
 }
+
+export interface CartProduct {
+  id:number;
+  title:string;
+  brand:string;
+  thumbnail:string;
+  price:number;
+  stock:number;
+  amount:number;
+}

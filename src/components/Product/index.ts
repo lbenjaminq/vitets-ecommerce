@@ -1,2 +1,2 @@
-export * from './CardProduct';
+export * from './CardProduct/cardProduct';
 export * from './index';
