@@ -45,19 +45,19 @@ export const CardProduct: React.FC<Props> = ({ product }) => {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  const productsCart = useAppSelector(state=>state.products)
+  const productsCart = useAppSelector(state => state.products)
 
   const addToCartProduct = () => {
-    const { id,brand,title,price,thumbnail,stock } = product
-    dispatch(addToCart({id,brand,title,price,thumbnail,stock,amount:1}))
+    const { id, brand, title, price, thumbnail, stock } = product
+    dispatch(addToCart({ id, brand, title, price, thumbnail, stock, amount: 1 }))
   }
 
-  useEffect(()=> {
-    setItem('cart',productsCart)
-  },[productsCart])
+  useEffect(() => {
+    setItem('cart', productsCart)
+  }, [productsCart])
 
   return (
-    <Card sx={{width:{xs:"100%",sm:"300px", md:"410px"}}}>
+    <Card sx={{ width: { xs: "100%", sm: "300px", md: "410px" } }}>
       <Stack
         direction="row"
         justifyContent="space-between"

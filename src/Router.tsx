@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { CardDetail, Checkout, Home } from "./pages";
+import { CardDetail, Checkout, Home, Login } from "./pages";
 import { RouterLayout } from "./RouterLayout";
 import { ContainerLayout } from "./styled-components/ContainerLayout";
 
@@ -12,6 +12,7 @@ export const AppRouter: React.FC = () => {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/detail/:id" element={<CardDetail/>} />
         </Route>
+        <Route path="/login" element={<Login/>}/>
       </Routes>
     </ContainerLayout>
   );

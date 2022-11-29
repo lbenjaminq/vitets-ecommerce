@@ -13,11 +13,23 @@ export interface Product {
 }
 
 export interface CartProduct {
-  id:number;
-  title:string;
-  brand:string;
-  thumbnail:string;
-  price:number;
-  stock:number;
-  amount:number;
+  id: number;
+  title: string;
+  brand: string;
+  thumbnail: string;
+  price: number;
+  stock: number;
+  amount: number;
+}
+
+export interface UserAccount {
+  email: string;
+  password: string;
+  address: string;
+  cellphone: number;
+}
+
+export interface UserActive {
+  email:string;
+  password:string;
 }
