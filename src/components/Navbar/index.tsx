@@ -1,5 +1,5 @@
 import { Box, AppBar, Toolbar, Typography, Button, IconButton } from '@mui/material'
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+// import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link } from 'react-router-dom';
 
 export const Navbar = () => {
@@ -13,7 +13,8 @@ export const Navbar = () => {
           </Typography>
           <Link to="/checkout">
             <IconButton>
-              <ShoppingCartIcon sx={{ color: "white" }} fontSize="large" />
+              CART
+              {/* <ShoppingCartIcon sx={{ color: "white" }} fontSize="large" /> */}
             </IconButton>
           </Link>
           <Button color="inherit">Login</Button>

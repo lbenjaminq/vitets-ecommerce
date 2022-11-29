@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { getItem } from '../../localstorage/useLocalStorage';
 import { CartProduct } from '../../types/types';
 
 
-const initialState: CartProduct[] = []
+const initialState: CartProduct[] = getItem('cart') || []
 
 export const cartSlice = createSlice({
   name: 'cart',

@@ -1,10 +1,10 @@
 import { List, ListItem, ListItemAvatar, Avatar, ListItemText, Typography, IconButton, Box, Paper } from '@mui/material'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import DeleteIcon from '@mui/icons-material/Delete';
 import { addToCart, removeToCart } from '../../redux/slices/cart.slice'
 import { CartProduct } from '../../types/types';
-import RemoveIcon from '@mui/icons-material/Remove';
-import AddIcon from '@mui/icons-material/Add';
+// import AddIcon from '@mui/icons-material/Add';
+// import RemoveIcon from '@mui/icons-material/Remove';
+// import DeleteIcon from '@mui/icons-material/Delete';
 
 export const Cart = () => {
 
@@ -56,13 +56,15 @@ export const Cart = () => {
             <Paper elevation={3} sx={{ width: "fit-content", height: "fit-content" }}>
               <Box component="div" sx={{ display: "flex", alignItems: "center", flexDirection: { xs: "column", md: "row" } }}>
                 <IconButton onClick={()=>removeToCartProduct(item)}>
-                  <RemoveIcon />
+                  remove
+                  {/* <RemoveIcon /> */}
                 </IconButton>
                 <Typography>
                   {item.amount}
                 </Typography>
                 <IconButton onClick={() => addToCartProducts(item)}>
-                  <AddIcon />
+                  add
+                  {/* <AddIcon /> */}
                 </IconButton>
               </Box>
             </Paper>

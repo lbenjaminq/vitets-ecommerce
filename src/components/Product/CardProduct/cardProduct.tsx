@@ -11,13 +11,15 @@ import {
   styled,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { Product } from "../../../types/types";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+// import FavoriteIcon from "@mui/icons-material/Favorite";
+// import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../../../redux/slices/cart.slice'
+import { setItem } from "../../../localstorage/useLocalStorage";
+import { useAppSelector } from "../../../redux/hooks";
 
 interface Props {
   product: Product;
@@ -43,11 +45,16 @@ export const CardProduct: React.FC<Props> = ({ product }) => {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  const productsCart = useAppSelector(state=>state.products)
 
   const addToCartProduct = () => {
     const { id,brand,title,price,thumbnail,stock } = product
     dispatch(addToCart({id,brand,title,price,thumbnail,stock,amount:1}))
   }
+
+  useEffect(()=> {
+    setItem('cart',productsCart)
+  },[productsCart])
 
   return (
     <Card sx={{width:{xs:"100%",sm:"300px", md:"410px"}}}>
@@ -76,7 +83,8 @@ export const CardProduct: React.FC<Props> = ({ product }) => {
           aria-expanded={expanded}
           aria-label="show more"
         >
-          <ExpandMoreIcon />
+          {/* <ExpandMoreIcon /> */}
+          exp
         </ExpandMore>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
@@ -88,7 +96,8 @@ export const CardProduct: React.FC<Props> = ({ product }) => {
         <Link to={`/detail/${product.id}`}>Detalle</Link>
         <CardActions disableSpacing>
           <IconButton aria-label="add to cart" onClick={addToCartProduct}>
-            <FavoriteIcon />
+            {/* <FavoriteIcon /> */}
+            fav
           </IconButton>
         </CardActions>
       </Stack>
