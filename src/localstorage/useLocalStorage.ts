@@ -1,5 +1,3 @@
-import { CartProduct } from "../types/types"
-
 export const getItem = (key:string) => {
   return JSON.parse(window.localStorage.getItem(key)!)
 }

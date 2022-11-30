@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Stack, Box, Grid, Typography } from '@mui/material'
 import { useParams } from 'react-router';
-import api from '../../api/api';
 import { Product } from '../../types/types';
+import api from '../../api/api';
 
 export const CardDetail = () => {
 
@@ -23,7 +23,7 @@ export const CardDetail = () => {
       width: "100%",
       height: "calc(100vh - 64px)",
       border: "2px solid red",
-      fontFamily:"sans-serif"
+      fontFamily: "sans-serif"
     }}>
       <Grid container columns={12} sx={{ display: "flex", justifyContent: "space-around" }} >
         <Grid item lg="auto">

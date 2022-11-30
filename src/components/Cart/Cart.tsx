@@ -20,7 +20,7 @@ export const Cart = () => {
     dispatch(removeToCart(item))
   }
 
-  if (!product.length) return 'No Products'
+  if (!product.length) return <h1>No products</h1>
 
   return (
     <List sx={{ minHeight: "80vh", width: { xs: "100%", md: "80%" }, backgroundColor: "#b5b5b5" }}>
@@ -55,7 +55,7 @@ export const Cart = () => {
             </Box>
             <Paper elevation={3} sx={{ width: "fit-content", height: "fit-content" }}>
               <Box component="div" sx={{ display: "flex", alignItems: "center", flexDirection: { xs: "column", md: "row" } }}>
-                <IconButton onClick={()=>removeToCartProduct(item)}>
+                <IconButton onClick={() => removeToCartProduct(item)}>
                   remove
                   {/* <RemoveIcon /> */}
                 </IconButton>

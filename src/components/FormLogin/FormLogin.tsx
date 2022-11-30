@@ -2,9 +2,9 @@ import React from 'react'
 import { Container, Grid, Paper, Box, Typography, TextField, Button } from '@mui/material'
 
 interface Props {
-  handleChange : (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleLogin : (e: React.MouseEvent) => Promise<void>;
-  handleOpen : () => void;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleLogin: (e: React.MouseEvent) => Promise<void>;
+  handleOpen: () => void;
 }
 
 export const FormLogin: React.FC<Props> = ({ handleChange, handleLogin, handleOpen }) => {

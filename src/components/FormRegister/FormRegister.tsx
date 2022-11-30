@@ -19,7 +19,6 @@ interface Props {
 export const FormRegister: React.FC<Props> = ({
   open,
   handleClose,
-  handleOpen,
 }) => {
   const auth = getAuth();
   const navigate = useNavigate()
@@ -27,8 +26,8 @@ export const FormRegister: React.FC<Props> = ({
   const [newAccount, setNewAccount] = React.useState<UserAccount>({
     email: "",
     password: "",
-    address:"",
-    cellphone:0
+    address: "",
+    cellphone: 0
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,7 +69,7 @@ export const FormRegister: React.FC<Props> = ({
         }}
       >
         <>
-          <form style={{width:"25%",backgroundColor:"white",padding:"0 2% 2% 2%",borderRadius:"20px",display:"flex",flexDirection:"column",alignItems:"center"}} onSubmit={handleRegister}>
+          <form style={{ width: "25%", backgroundColor: "white", padding: "0 2% 2% 2%", borderRadius: "20px", display: "flex", flexDirection: "column", alignItems: "center" }} onSubmit={handleRegister}>
             {/* <CancelIcon
               onClick={handleClose}
               sx={{ fontSize: "2.5rem", marginLeft: "100%", cursor: "pointer" }}
@@ -84,7 +83,7 @@ export const FormRegister: React.FC<Props> = ({
             </Typography>
             <Stack direction="row" spacing={2} >
               <Stack direction="column">
-              <TextField
+                <TextField
                   fullWidth
                   label="email"
                   type="email"
@@ -126,7 +125,7 @@ export const FormRegister: React.FC<Props> = ({
             <Button
               variant="contained"
               type="submit"
-              sx={{mt:2.5}}
+              sx={{ mt: 2.5 }}
               onClick={handleRegister}
             >
               Registrarse

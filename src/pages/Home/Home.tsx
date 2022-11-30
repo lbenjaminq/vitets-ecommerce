@@ -17,12 +17,12 @@ export const Home = () => {
         container
         rowSpacing={4}
         columnSpacing={{ xs: 1, sm: 2, md: 4 }}
-        sx={{margin:"auto"}}
+        sx={{ margin: "auto" }}
       >
         {products?.map((product) => (
           <Grid key={product.id} item>
             <CardProduct product={product} />
-          </Grid>  
+          </Grid>
         ))}
       </Grid>
     </Container>

@@ -30,6 +30,6 @@ export interface UserAccount {
 }
 
 export interface UserActive {
-  email:string;
-  password:string;
+  email: string;
+  password: string;
 }

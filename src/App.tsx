@@ -6,11 +6,11 @@ import firebaseConfig from "./config/firebase";
 initializeApp(firebaseConfig);
 
 function App() {
-  
+
   return (
-      <Router>
-        <AppRouter />
-      </Router>
+    <Router>
+      <AppRouter />
+    </Router>
   );
 }
 

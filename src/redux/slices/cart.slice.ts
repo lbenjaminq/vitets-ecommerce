@@ -32,7 +32,7 @@ export const cartSlice = createSlice({
       if (itemFind) {
         if (itemFind.amount > 1) {
           return state.map((item) => {
-            if(item.id ===id){
+            if (item.id === id) {
               return {
                 ...item,
                 amount: item.amount - 1
@@ -40,7 +40,7 @@ export const cartSlice = createSlice({
             }
             return item
           })
-        }else{
+        } else {
           return state.filter(item => item.id !== id)
         }
       }

@@ -5,7 +5,7 @@ import userSlice from "./slices/user.slice";
 
 export interface AppStore {
   products: CartProduct[],
-  user:UserActive
+  user: UserActive
 }
 const store = configureStore<AppStore>({
   reducer: {
