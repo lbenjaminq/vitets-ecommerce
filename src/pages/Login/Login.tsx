@@ -1,12 +1,13 @@
-import { Box, Button, Container, Grid, Paper, TextField, Typography } from "@mui/material"
 import { useState } from "react"
-import { FormRegister } from "../../components"
+import { FormLogin, FormRegister } from "../../components"
 import {
   signInWithEmailAndPassword,
   getAuth
 } from "firebase/auth";
 import { UserActive } from "../../types/types";
 import { useNavigate } from "react-router";
+import { useAppDispatch } from "../../redux/hooks";
+import { userActive } from '../../redux/slices/user.slice'
 
 const initialState = {
   email: "",
@@ -16,6 +17,7 @@ const initialState = {
 export const Login = () => {
   const auth = getAuth();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch()
 
   const [user, setUser] = useState<UserActive>(initialState)
 
@@ -34,9 +36,9 @@ export const Login = () => {
   const handleLogin = (e: React.MouseEvent) => {
     return signInWithEmailAndPassword(auth, user.email, user.password)
       .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log(user);
+        const userApp = userCredential.user;
+        console.log(userApp);
+        dispatch(userActive(user))
         navigate('/')
       })
       .catch((error) => {
@@ -47,48 +49,8 @@ export const Login = () => {
 
   return (
     <div>
-      <Container>
-        <Grid
-          container
-          direction="column"
-          alignItems="center"
-          justifyContent="center"
-          sx={{ minHeight: "100vh" }}
-        >
-          <Grid item>
-            <Paper>
-              <Typography>
-                Login
-              </Typography>
-              <Box>
-                <TextField
-                  name="email"
-                  type="text"
-                  fullWidth
-                  label="Email"
-                  onChange={handleChange}
-                />
-                <TextField
-                  name="password"
-                  type="password"
-                  fullWidth
-                  label="Password"
-                  onChange={handleChange}
-                />
-                <Button
-                  variant="contained"
-                  type="submit"
-                  onClick={handleLogin}
-                >
-                  Login
-                </Button>
-                <Button onClick={handleOpen} >Register</Button>
-              </Box>
-            </Paper>
-          </Grid>
-        </Grid>
-        <FormRegister handleClose={handleClose} handleOpen={handleOpen} open={open} />
-      </Container>
+      <FormLogin handleChange={handleChange} handleLogin={handleLogin} handleOpen={handleOpen} />
+      <FormRegister handleClose={handleClose} handleOpen={handleOpen} open={open} />
     </div>
   )
 }

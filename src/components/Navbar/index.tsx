@@ -1,13 +1,19 @@
 import { Box, AppBar, Toolbar, Typography, Button, IconButton } from '@mui/material'
 // import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { signOut,getAuth } from 'firebase/auth'
+import { useAppDispatch } from '../../redux/hooks';
+import { userSignOut } from '../../redux/slices/user.slice';
 
 export const Navbar = () => {
   const auth = getAuth();
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
 
   const logout = () => {
    signOut(auth)
+   dispatch(userSignOut())
+   navigate('/login')
   }
 
   return (
