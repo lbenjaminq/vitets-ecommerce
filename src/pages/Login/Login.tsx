@@ -1,43 +1,44 @@
-import { useEffect, useState } from "react"
-import { FormLogin, FormRegister } from "../../components"
+import { useEffect, useState } from 'react';
+import { FormLogin, FormRegister } from '../../components';
 import {
   signInWithEmailAndPassword,
   getAuth
-} from "firebase/auth";
-import { UserActive } from "../../types/types";
-import { useNavigate } from "react-router";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { userActive } from '../../redux/slices/user.slice'
-import { setItem } from "../../localstorage/useLocalStorage";
+} from 'firebase/auth';
+import { UserActive } from '../../types/types';
+import { useNavigate } from 'react-router';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { userActive } from '../../redux/slices/user.slice';
+import { setItem } from '../../localstorage/useLocalStorage';
 
 const initialState = {
   email: "",
   password: ""
-}
+};
 
 export const Login = () => {
   const auth = getAuth();
   const navigate = useNavigate();
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
+  const userState = useAppSelector(state => state.user);
 
-  const [user, setUser] = useState<UserActive>(initialState)
-  const userState = useAppSelector(state => state.user)
-
-  useEffect(() => {
-    setItem('user',userState)
-  },[userState])
-
-  const [open, setOpen] = useState(false)
-  const handleClose = () => {
-    setOpen(false)
-  }
-  const handleOpen = () => {
-    setOpen(true)
-  }
+  const [user, setUser] = useState<UserActive>(initialState);
+  const [open, setOpen] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUser({ ...user, [e.target.name]: e.target.value })
-  }
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  useEffect(() => {
+    setItem('user', userState);
+  }, [userState]);
 
   const handleLogin = (e: React.MouseEvent) => {
     return signInWithEmailAndPassword(auth, user.email, user.password)

@@ -1,14 +1,20 @@
-import { useState } from 'react'
-import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material'
-import { Price } from '../../models'
+import React from 'react';
+import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { useAppDispatch } from '@/redux';
+import { priceFilter } from '@/redux/slices/products.slice';
+import { Price } from '@/models';
 
-export const FilterPrice = () => {
+interface Props {
+  price: string;
+  setPrice: (price: Price) => void;
+}
 
-  const [price, setPrice] = useState(Price.DEFAULT)
+export const FilterPrice: React.FC<Props> = ({ price, setPrice }) => {
+  const dispatch = useAppDispatch();
 
   const handleChange = (event: SelectChangeEvent) => {
-    setPrice(event.target.value as Price)
-    console.log(event.target.value)
+    setPrice(event.target.value as Price);
+    dispatch(priceFilter(event.target.value as Price));
   }
 
   return (
@@ -21,7 +27,6 @@ export const FilterPrice = () => {
         label="Price"
         onChange={handleChange}
       >
-        <MenuItem sx={{ color: "black" }} value={Price.DEFAULT}>{Price.DEFAULT}</MenuItem>
         <MenuItem sx={{ color: "black" }} value={Price.CHEAP}>{Price.CHEAP}</MenuItem>
         <MenuItem sx={{ color: "black" }} value={Price.EXPENSIVE}>{Price.EXPENSIVE}</MenuItem>
       </Select>

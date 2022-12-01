@@ -1,26 +1,34 @@
-import { useEffect } from "react";
-import { Container, Grid, Stack } from "@mui/material";
-import { CardProduct, FilterCategory, FilterPrice, Search } from "../../components";
-import { getProductAction } from "../../redux/actions/products";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { cleanState } from "../../redux/slices/products.slice";
+import { useState, useEffect } from 'react';
+import { Button, Container, Grid, Stack } from '@mui/material';
+import { getProductAction, useAppDispatch, useAppSelector } from '@/redux';
+import { cleanState } from '@/redux/slices/products.slice';
+import { CardProduct, FilterCategory, FilterPrice, Search } from '@/components';
 
 export const Home = () => {
+  const dispatch = useAppDispatch();
+  const products = useAppSelector(state => state.products.products);
 
-  const dispatch = useAppDispatch()
-  const products = useAppSelector(state => state.products.products)
+  const [price, setPrice] = useState('');
+  const [categorySelected, setCategorySelected] = useState('');
+
+  const handleReset = () => {
+    dispatch(getProductAction());
+    setPrice('');
+    setCategorySelected('');
+  };
 
   useEffect(() => {
-    dispatch(getProductAction())
-    return () => { dispatch(cleanState()) }
-  }, [products]);
+    dispatch(getProductAction());
+    return () => { dispatch(cleanState()) };
+  }, []);
 
   return (
     <Container maxWidth={false}>
       <Stack direction="row" spacing={12} sx={{ marginTop: "20px" }}>
         <Search />
-        <FilterPrice />
-        <FilterCategory />
+        <FilterPrice price={price} setPrice={setPrice} />
+        <FilterCategory categorySelected={categorySelected} setCategorySelected={setCategorySelected} />
+        <Button variant="outlined" color="primary" onClick={handleReset}>reset filters</Button>
       </Stack>
       <Grid
         container

@@ -1,5 +1,5 @@
-import { getProduct, getProductById, getProductBySearch } from '../slices/products.slice';
-import api from '../../api/api';
+import { api } from "@/api";
+import { getProduct, getProductById, getProductBySearch } from "../slices/products.slice";
 
 export const getProductAction = () => (dispatch: any) => {
   api
@@ -13,11 +13,19 @@ export const getProductByIdAction = (id: string) => (dispatch: any) => {
     .getProductById(id)
     .then((data) => dispatch(getProductById(data)))
     .catch((err) => console.log(err));
-}
+};
+
+export const getProductByCategory = (category: string) => (dispatch: any) => {
+  api
+    .getProductCategory(category)
+    .then((data) => dispatch(getProductBySearch(data)))
+    .catch((err) => console.log(err));
+};
 
 export const getProductSearchAction = (product: string) => (dispatch: any) => {
   api
     .getProductBySearch(product)
     .then((data) => dispatch(getProductBySearch(data)))
-    .catch((err) => console.log(err))
-}
+    .catch((err) => console.log(err));
+};
+

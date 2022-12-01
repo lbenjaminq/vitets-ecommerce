@@ -1,18 +1,29 @@
-import { useState, useEffect } from 'react'
-import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material'
-import { api } from '../../api'
+import React, { useState, useEffect } from 'react';
+import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { getProductByCategory, useAppDispatch } from '@/redux';
+import { api } from '@/api';
 
-export const FilterCategory = () => {
+interface Props {
+  categorySelected: string;
+  setCategorySelected: (category: string) => void;
+}
 
-  const [categories, setcategories] = useState<string[]>([])
-  const [categorySelected, setCategorySelected] = useState('')
+export const FilterCategory: React.FC<Props> = ({ categorySelected, setCategorySelected }) => {
+  const dispatch = useAppDispatch();
+
+  const [categories, setcategories] = useState<string[]>()
   const handleChange = (event: SelectChangeEvent) => {
-    setCategorySelected(event.target.value as string)
-    console.log("data", event.target.value as string);
-  }
+    setCategorySelected(event.target.value as string);
+  };
 
   useEffect(() => {
-    api.getAllCategories().then(categories => setcategories(categories))
+    if (categorySelected) {
+      dispatch(getProductByCategory(categorySelected));
+    };
+  }, [categorySelected])
+
+  useEffect(() => {
+    api.getAllCategories().then(categories => setcategories(categories));
   }, [])
 
   return (
@@ -22,7 +33,9 @@ export const FilterCategory = () => {
         labelId="demo-simple-select-label"
         id="demo-simple-select"
         value={categorySelected}
+        defaultValue={''}
         label="Category"
+        // onOpen={() => setCategorySelected('')}
         onChange={handleChange}
       >
         {

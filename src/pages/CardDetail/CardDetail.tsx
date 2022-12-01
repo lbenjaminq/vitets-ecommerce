@@ -1,23 +1,20 @@
-import { useEffect, useState } from 'react'
-import { Stack, Box, Grid, Typography } from '@mui/material'
+import { useEffect } from 'react';
+import { Stack, Box, Grid, Typography } from '@mui/material';
 import { useParams } from 'react-router';
-import { getProductByIdAction } from '../../redux/actions/products';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { cleanState } from '../../redux/slices/products.slice';
+import { getProductByIdAction, useAppDispatch, useAppSelector } from '@/redux';
+import { cleanState } from '@/redux/slices/products.slice';
 
 export const CardDetail = () => {
-
-  const { id } = useParams()
-  const dispatch = useAppDispatch()
-  const product = useAppSelector(state => state.products.productDetail)
+  const { id } = useParams();
+  const dispatch = useAppDispatch();
+  const product = useAppSelector(state => state.products.productDetail);
 
   useEffect(() => {
     if (id) {
-      dispatch(getProductByIdAction(id))
-    }
-
-    return () => { dispatch(cleanState()) }
-  }, [])
+      dispatch(getProductByIdAction(id));
+    };
+    return () => { dispatch(cleanState()) };
+  }, []);
 
   return (
     <Box component="div" sx={{

@@ -1,8 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { CartProduct, ProductState, UserActive } from "../types/types";
-import cartSlice from "./slices/cart.slice";
-import productSlice from "./slices/products.slice";
-import userSlice from "./slices/user.slice";
+import { CartProduct, ProductState, UserActive } from '@/types/types';
+import { configureStore } from '@reduxjs/toolkit';
+import cartSlice from './slices/cart.slice';
+import productSlice from './slices/products.slice';
+import userSlice from './slices/user.slice';
 
 export interface AppStore {
   cartProducts: CartProduct[],
@@ -17,8 +17,8 @@ const store = configureStore<AppStore>({
   }
 });
 
-export type AppDispatch = typeof store.dispatch
-export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
 
 
 export default store;

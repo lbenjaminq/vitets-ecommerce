@@ -1,43 +1,41 @@
 import {
   Card,
   CardActions,
-  CardContent,
   CardHeader,
   CardMedia,
   IconButton,
   Stack,
-  Button
-} from "@mui/material";
-import React, { useEffect } from "react";
-import { Product } from "../../../types/types";
-import { BsFillCartPlusFill } from 'react-icons/bs'
-import { Link } from "react-router-dom";
-import { useDispatch } from 'react-redux'
-import { addToCart } from '../../../redux/slices/cart.slice'
-import { setItem } from "../../../localstorage/useLocalStorage";
-import { useAppSelector } from "../../../redux/hooks";
+  Button,
+  Typography
+} from '@mui/material';
+import React, { useEffect } from 'react';
+import { BsFillCartPlusFill } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useAppSelector } from '@/redux';
+import { addToCart } from '@/redux/slices/cart.slice';
+import { setItem } from '@/localstorage/useLocalStorage';
+import { Product } from '@/types/types';
 
 interface Props {
   product: Product;
 }
 
 export const CardProduct: React.FC<Props> = ({ product }) => {
-  const dispatch = useDispatch()
-
-  const productsCart = useAppSelector(state => state.cartProducts)
+  const dispatch = useDispatch();
+  const productsCart = useAppSelector(state => state.cartProducts);
 
   const addToCartProduct = () => {
-    console.log(product)
-    const { id, brand, title, price, thumbnail, stock } = product
-    dispatch(addToCart({ id, brand, title, price, thumbnail, stock, amount: 1 }))
-  }
+    const { id, brand, title, price, thumbnail, stock } = product;
+    dispatch(addToCart({ id, brand, title, price, thumbnail, stock, amount: 1 }));
+  };
 
   useEffect(() => {
-    setItem('cart', productsCart)
+    setItem('cart', productsCart);
   }, [productsCart])
 
   return (
-    <Card sx={{backgroundColor:"black",width: { xs: "100%", sm: "300px", md: "410px" } }}>
+    <Card sx={{ backgroundColor: "black", width: { xs: "100%", sm: "300px", md: "410px" } }}>
       <Stack
         direction="row"
         justifyContent="space-between"
@@ -57,16 +55,19 @@ export const CardProduct: React.FC<Props> = ({ product }) => {
         />
       </Stack>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <Link to={`/detail/${product.id}`} style={{color:"black",textDecoration:"none"}}>
+        <Link to={`/detail/${product.id}`} style={{ color: "black", textDecoration: "none" }}>
           <Button variant="contained" color="secondary">
-          Show more
+            Show more
           </Button >
         </Link>
-        <CardActions disableSpacing>
-          <IconButton aria-label="add to cart" onClick={addToCartProduct}>
-            <BsFillCartPlusFill color="white"/>
-          </IconButton>
-        </CardActions>
+        <Stack direction="row" alignItems="center">
+          <CardActions disableSpacing>
+            <IconButton aria-label="add to cart" onClick={addToCartProduct}>
+              <BsFillCartPlusFill color="white" />
+            </IconButton>
+          </CardActions>
+          <Typography>${product.price}</Typography>
+        </Stack>
       </Stack>
     </Card>
   );

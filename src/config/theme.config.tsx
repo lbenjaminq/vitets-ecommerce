@@ -1,4 +1,4 @@
-import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import React from "react";
 
 type ThemeProp = {
@@ -33,18 +33,18 @@ export const theme = createTheme({
   },
   typography: {
     fontFamily: themePalette.FONT_GLOBAL,
-    allVariants:{
+    allVariants: {
       color: "white"
     }
   },
   components: {
     MuiButton: {
-      styleOverrides:{
-        contained:{
+      styleOverrides: {
+        contained: {
           backgroundColor: themePalette.WHITE,
           "&:hover": {
             backgroundColor: themePalette.BLACK,
-            color:themePalette.WHITE
+            color: themePalette.WHITE
           },
         }
       },

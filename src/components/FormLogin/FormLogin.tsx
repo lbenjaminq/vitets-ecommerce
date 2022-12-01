@@ -1,5 +1,5 @@
-import React from 'react'
-import { Container, Grid, Paper, Box, Typography, TextField, Button } from '@mui/material'
+import React from 'react';
+import { Container, Grid, Paper, Box, Typography, TextField, Button } from '@mui/material';
 
 interface Props {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -15,14 +15,14 @@ export const FormLogin: React.FC<Props> = ({ handleChange, handleLogin, handleOp
         direction="column"
         alignItems="center"
         justifyContent="center"
-        sx={{ minHeight: "100vh"}}
+        sx={{ minHeight: "100vh" }}
       >
-        <Grid item sx={{width:{xs:"250px",md:"300px"},height:"350px"}}>
-          <Paper sx={{height:"100%",padding:"20px"}} variant="elevation">
-            <Typography variant="h4" sx={{textAlign:"center"}}>
+        <Grid item sx={{ width: { xs: "250px", md: "300px" }, height: "350px" }}>
+          <Paper sx={{ height: "100%", padding: "20px" }} variant="elevation">
+            <Typography variant="h4" sx={{ textAlign: "center" }}>
               Login
             </Typography>
-            <Box sx={{margin:"20px 0",height:"80%",display:"flex",flexDirection:"column",justifyContent:"space-between"}}>
+            <Box sx={{ margin: "20px 0", height: "80%", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
               <TextField
                 name="email"
                 type="text"

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Modal,
   TextField,
@@ -6,11 +6,11 @@ import {
   Typography,
   Stack,
   Box,
-} from "@mui/material";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
-import { useNavigate } from "react-router-dom"
-import { UserAccount } from "../../types/types";
-import { AiFillCloseCircle } from 'react-icons/ai'
+} from '@mui/material';
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
+import { AiFillCloseCircle } from 'react-icons/ai';
+import { UserAccount } from '@/types/types';
 
 interface Props {
   open: boolean;
@@ -23,7 +23,7 @@ export const FormRegister: React.FC<Props> = ({
   handleClose,
 }) => {
   const auth = getAuth();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [newAccount, setNewAccount] = React.useState<UserAccount>({
     email: "",
@@ -42,16 +42,8 @@ export const FormRegister: React.FC<Props> = ({
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, newAccount.email, newAccount.password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log(user);
-        navigate('/login')
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-    //THIS INFORMATION HAS TO GO TO THE DATABASE
+      .then(() => navigate('/login'))
+      .catch((error) => console.log(error.message));
   };
 
   return (
@@ -76,7 +68,6 @@ export const FormRegister: React.FC<Props> = ({
               style={{ position: "absolute", right: "3px", cursor: "pointer", fontSize: "2rem" }}
               onClick={handleClose}
             />
-            {/* <Button onClick={handleClose} size="small" variant="contained" sx={{position:"absolute",right:"0px",}}>X</Button> */}
             <Typography
               sx={{ fontSize: { xs: "1.5rem", md: "2rem" }, textAlign: "center", padding: { xs: "4% 0", md: "8% 0" } }}
             >

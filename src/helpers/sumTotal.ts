@@ -1,7 +1,7 @@
-import { CartProduct } from '../types/types'
+import { CartProduct } from "@/types/types"
 
-export const sumTotal = (products : CartProduct[]) => {
+export const sumTotal = (products: CartProduct[]) => {
   return products.reduce((acc, item) => {
     return acc + (item.price * item.amount)
-  },0)
+  }, 0)
 }

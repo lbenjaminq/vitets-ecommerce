@@ -1,7 +1,7 @@
-import { Routes, Route } from "react-router-dom";
-import { CardDetail, Checkout, Home, Login } from "./pages";
-import { RouterLayout } from "./RouterLayout";
-import { ContainerLayout } from "./styled-components/ContainerLayout";
+import { Routes, Route } from 'react-router-dom';
+import { CardDetail, Checkout, Home, Login } from './pages';
+import { RouterLayout } from './RouterLayout';
+import { ContainerLayout } from './styled-components/ContainerLayout';
 
 export const AppRouter: React.FC = () => {
   return (

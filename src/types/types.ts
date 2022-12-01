@@ -14,6 +14,7 @@ export interface Product {
 
 export interface ProductState {
   products: Product[];
+  productsClean: Product[];
   productDetail: Product | null;
 }
 

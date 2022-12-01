@@ -1,23 +1,22 @@
-import { List, ListItem, ListItemAvatar, Avatar, ListItemText, Typography, IconButton, Box, Paper } from '@mui/material'
-import { sumTotal } from '../../helpers/sumTotal';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { addToCart, removeToCart } from '../../redux/slices/cart.slice'
-import { CartProduct } from '../../types/types';
+import { sumTotal } from '@/helpers/sumTotal';
+import { useAppDispatch, useAppSelector } from '@/redux';
+import { addToCart, removeToCart } from '@/redux/slices/cart.slice';
+import { CartProduct } from '@/types/types';
+import { List, ListItem, ListItemAvatar, Avatar, ListItemText, Typography, IconButton, Box, Paper } from '@mui/material';
 
 export const Cart = () => {
-
-  const product = useAppSelector(state => state.cartProducts)
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
+  const product = useAppSelector(state => state.cartProducts);
 
   const addToCartProducts = (item: CartProduct) => {
-    dispatch(addToCart(item))
+    dispatch(addToCart(item));
   }
 
   const removeToCartProduct = (item: CartProduct) => {
-    dispatch(removeToCart(item))
-  }
+    dispatch(removeToCart(item));
+  };
 
-  if (!product.length) return <h1 style={{ color: "black" }}>No products</h1>
+  if (!product.length) return <h1 style={{ color: "black" }}>No products</h1>;
 
   return (
     <List sx={{ minHeight: "80vh", width: { xs: "100%", md: "80%" }, backgroundColor: "#b5b5b5" }}>

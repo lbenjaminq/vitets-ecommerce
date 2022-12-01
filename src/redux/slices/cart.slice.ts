@@ -1,10 +1,10 @@
+import { getItem } from '@/localstorage/useLocalStorage';
+import { CartProduct } from '@/types/types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { getItem } from '../../localstorage/useLocalStorage';
-import { CartProduct } from '../../types/types';
 
 
 const initialState: CartProduct[] = getItem('cart') || []
-console.log("STATACTION",initialState)
+console.log("STATACTION", initialState)
 
 export const cartSlice = createSlice({
   name: 'cart',
@@ -22,14 +22,14 @@ export const cartSlice = createSlice({
             };
           }
           return item;
-        })
+        });
       } else {
-        state.push({ title, brand, id, thumbnail, amount, price, stock })
+        state.push({ title, brand, id, thumbnail, amount, price, stock });
       }
     },
     removeToCart: (state, action: PayloadAction<CartProduct>) => {
       const { id } = action.payload;
-      const itemFind = state.find((item) => item.id === id)
+      const itemFind = state.find((item) => item.id === id);
       if (itemFind) {
         if (itemFind.amount > 1) {
           return state.map((item) => {
@@ -39,16 +39,14 @@ export const cartSlice = createSlice({
                 amount: item.amount - 1
               }
             }
-            return item
+            return item;
           })
         } else {
-          return state.filter(item => item.id !== id)
+          return state.filter(item => item.id !== id);
         }
       }
     },
-    cleanCart: (state, action) => {
-
-    }
+    cleanCart: (state, action) => { }
   }
 })
 
