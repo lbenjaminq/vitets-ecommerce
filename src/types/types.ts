@@ -12,6 +12,11 @@ export interface Product {
   images: string[];
 }
 
+export interface ProductState {
+  products: Product[];
+  productDetail: Product | null;
+}
+
 export interface CartProduct {
   id: number;
   title: string;

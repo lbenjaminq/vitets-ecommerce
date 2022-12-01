@@ -25,7 +25,7 @@ export const Navbar = () => {
           </Typography>
           <Link to="/checkout">
             <IconButton>
-              <BsFillCartFill style={{color:"white"}} />
+              <BsFillCartFill style={{ color: "white" }} />
             </IconButton>
           </Link>
           <Button color="inherit" onClick={logout}>Logout</Button>

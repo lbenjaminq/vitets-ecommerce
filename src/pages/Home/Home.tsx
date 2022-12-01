@@ -1,18 +1,27 @@
-import { useEffect, useState } from "react";
-import { Container, Grid } from "@mui/material";
-import { Product } from "../../types/types";
-import api from "../../api/api";
-import { CardProduct } from "../../components";
+import { useEffect } from "react";
+import { Container, Grid, Stack } from "@mui/material";
+import { CardProduct, FilterCategory, FilterPrice, Search } from "../../components";
+import { getProductAction } from "../../redux/actions/products";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { cleanState } from "../../redux/slices/products.slice";
 
 export const Home = () => {
-  const [products, setProducts] = useState<Product[]>([]);
+
+  const dispatch = useAppDispatch()
+  const products = useAppSelector(state => state.products.products)
 
   useEffect(() => {
-    api.allProducts().then((products) => setProducts(products));
-  }, []);
+    dispatch(getProductAction())
+    return () => { dispatch(cleanState()) }
+  }, [products]);
 
   return (
     <Container maxWidth={false}>
+      <Stack direction="row" spacing={12} sx={{ marginTop: "20px" }}>
+        <Search />
+        <FilterPrice />
+        <FilterCategory />
+      </Stack>
       <Grid
         container
         rowSpacing={4}

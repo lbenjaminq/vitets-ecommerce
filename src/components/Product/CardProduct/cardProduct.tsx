@@ -4,18 +4,13 @@ import {
   CardContent,
   CardHeader,
   CardMedia,
-  Collapse,
   IconButton,
-  IconButtonProps,
   Stack,
-  styled,
-  Typography,
   Button
 } from "@mui/material";
 import React, { useEffect } from "react";
 import { Product } from "../../../types/types";
 import { BsFillCartPlusFill } from 'react-icons/bs'
-import { MdExpandMore } from 'react-icons/md'
 import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../../../redux/slices/cart.slice'
@@ -29,9 +24,10 @@ interface Props {
 export const CardProduct: React.FC<Props> = ({ product }) => {
   const dispatch = useDispatch()
 
-  const productsCart = useAppSelector(state => state.products)
+  const productsCart = useAppSelector(state => state.cartProducts)
 
   const addToCartProduct = () => {
+    console.log(product)
     const { id, brand, title, price, thumbnail, stock } = product
     dispatch(addToCart({ id, brand, title, price, thumbnail, stock, amount: 1 }))
   }

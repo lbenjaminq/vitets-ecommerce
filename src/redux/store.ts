@@ -1,16 +1,19 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { CartProduct, UserActive } from "../types/types";
+import { CartProduct, ProductState, UserActive } from "../types/types";
 import cartSlice from "./slices/cart.slice";
+import productSlice from "./slices/products.slice";
 import userSlice from "./slices/user.slice";
 
 export interface AppStore {
-  products: CartProduct[],
-  user: UserActive
+  cartProducts: CartProduct[],
+  user: UserActive,
+  products: ProductState
 }
 const store = configureStore<AppStore>({
   reducer: {
-    products: cartSlice,
-    user: userSlice
+    cartProducts: cartSlice,
+    user: userSlice,
+    products: productSlice,
   }
 });
 

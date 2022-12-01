@@ -1,26 +1,23 @@
 import { List, ListItem, ListItemAvatar, Avatar, ListItemText, Typography, IconButton, Box, Paper } from '@mui/material'
+import { sumTotal } from '../../helpers/sumTotal';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { addToCart, removeToCart } from '../../redux/slices/cart.slice'
 import { CartProduct } from '../../types/types';
-// import AddIcon from '@mui/icons-material/Add';
-// import RemoveIcon from '@mui/icons-material/Remove';
-// import DeleteIcon from '@mui/icons-material/Delete';
 
 export const Cart = () => {
 
-  const product = useAppSelector(state => state.products)
+  const product = useAppSelector(state => state.cartProducts)
   const dispatch = useAppDispatch()
 
   const addToCartProducts = (item: CartProduct) => {
     dispatch(addToCart(item))
-    // console.log(item)
   }
 
   const removeToCartProduct = (item: CartProduct) => {
     dispatch(removeToCart(item))
   }
 
-  if (!product.length) return <h1>No products</h1>
+  if (!product.length) return <h1 style={{ color: "black" }}>No products</h1>
 
   return (
     <List sx={{ minHeight: "80vh", width: { xs: "100%", md: "80%" }, backgroundColor: "#b5b5b5" }}>
@@ -59,7 +56,7 @@ export const Cart = () => {
                   remove
                   {/* <RemoveIcon /> */}
                 </IconButton>
-                <Typography>
+                <Typography color={"black"}>
                   {item.amount}
                 </Typography>
                 <IconButton onClick={() => addToCartProducts(item)}>
@@ -71,6 +68,10 @@ export const Cart = () => {
           </ListItem>
         ))
       }
+      <Box component="div">
+        <Typography variant="h3">TOTAL</Typography>
+        <Typography variant="h3">${sumTotal(product)}</Typography>
+      </Box>
     </List>
   );
 }

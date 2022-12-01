@@ -4,6 +4,7 @@ import { CartProduct } from '../../types/types';
 
 
 const initialState: CartProduct[] = getItem('cart') || []
+console.log("STATACTION",initialState)
 
 export const cartSlice = createSlice({
   name: 'cart',
