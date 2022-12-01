@@ -5,10 +5,12 @@ import {
   Button,
   Typography,
   Stack,
+  Box,
 } from "@mui/material";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { useNavigate } from "react-router-dom"
 import { UserAccount } from "../../types/types";
+import { AiFillCloseCircle } from 'react-icons/ai'
 
 interface Props {
   open: boolean;
@@ -44,7 +46,7 @@ export const FormRegister: React.FC<Props> = ({
         // Signed in
         const user = userCredential.user;
         console.log(user);
-        navigate('/')
+        navigate('/login')
       })
       .catch((error) => {
         console.log(error.message);
@@ -69,19 +71,18 @@ export const FormRegister: React.FC<Props> = ({
         }}
       >
         <>
-          <form style={{ width: "25%", backgroundColor: "white", padding: "0 2% 2% 2%", borderRadius: "20px", display: "flex", flexDirection: "column", alignItems: "center" }} onSubmit={handleRegister}>
-            {/* <CancelIcon
+          <Box component="form" sx={{ width: "350px", height: { xs: "500px", md: "500px", lg: "500px" }, backgroundColor: "white", padding: "0 2% 2% 2%", borderRadius: "20px", display: "flex", flexDirection: "column", alignItems: "center", position: "relative" }} onSubmit={handleRegister}>
+            <AiFillCloseCircle
+              style={{ position: "absolute", right: "3px", cursor: "pointer", fontSize: "2rem" }}
               onClick={handleClose}
-              sx={{ fontSize: "2.5rem", marginLeft: "100%", cursor: "pointer" }}
-            /> */}
-            <Button onClick={handleClose}>X</Button>
+            />
+            {/* <Button onClick={handleClose} size="small" variant="contained" sx={{position:"absolute",right:"0px",}}>X</Button> */}
             <Typography
-              variant="h3"
-              sx={{ textAlign: "center", padding: "4% 0" }}
+              sx={{ fontSize: { xs: "1.5rem", md: "2rem" }, textAlign: "center", padding: { xs: "4% 0", md: "8% 0" } }}
             >
               Register to buy
             </Typography>
-            <Stack direction="row" spacing={2} >
+            <Stack direction="row" spacing={2}>
               <Stack direction="column">
                 <TextField
                   fullWidth
@@ -127,10 +128,11 @@ export const FormRegister: React.FC<Props> = ({
               type="submit"
               sx={{ mt: 2.5 }}
               onClick={handleRegister}
+              color="primary"
             >
               Registrarse
             </Button>
-          </form>
+          </Box>
         </>
       </Modal>
     </>

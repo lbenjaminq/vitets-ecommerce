@@ -15,14 +15,14 @@ export const FormLogin: React.FC<Props> = ({ handleChange, handleLogin, handleOp
         direction="column"
         alignItems="center"
         justifyContent="center"
-        sx={{ minHeight: "100vh" }}
+        sx={{ minHeight: "100vh"}}
       >
-        <Grid item>
-          <Paper>
-            <Typography>
+        <Grid item sx={{width:{xs:"250px",md:"300px"},height:"350px"}}>
+          <Paper sx={{height:"100%",padding:"20px"}} variant="elevation">
+            <Typography variant="h4" sx={{textAlign:"center"}}>
               Login
             </Typography>
-            <Box>
+            <Box sx={{margin:"20px 0",height:"80%",display:"flex",flexDirection:"column",justifyContent:"space-between"}}>
               <TextField
                 name="email"
                 type="text"
@@ -44,7 +44,7 @@ export const FormLogin: React.FC<Props> = ({ handleChange, handleLogin, handleOp
               >
                 Login
               </Button>
-              <Button onClick={handleOpen} >Register</Button>
+              <Button onClick={handleOpen} variant="outlined" >Register</Button>
             </Box>
           </Paper>
         </Grid>

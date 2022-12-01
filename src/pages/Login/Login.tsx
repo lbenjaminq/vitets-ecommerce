@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { FormLogin, FormRegister } from "../../components"
 import {
   signInWithEmailAndPassword,
@@ -6,8 +6,9 @@ import {
 } from "firebase/auth";
 import { UserActive } from "../../types/types";
 import { useNavigate } from "react-router";
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { userActive } from '../../redux/slices/user.slice'
+import { setItem } from "../../localstorage/useLocalStorage";
 
 const initialState = {
   email: "",
@@ -20,6 +21,11 @@ export const Login = () => {
   const dispatch = useAppDispatch()
 
   const [user, setUser] = useState<UserActive>(initialState)
+  const userState = useAppSelector(state => state.user)
+
+  useEffect(() => {
+    setItem('user',userState)
+  },[userState])
 
   const [open, setOpen] = useState(false)
   const handleClose = () => {
@@ -35,9 +41,7 @@ export const Login = () => {
 
   const handleLogin = (e: React.MouseEvent) => {
     return signInWithEmailAndPassword(auth, user.email, user.password)
-      .then((userCredential) => {
-        const userApp = userCredential.user;
-        console.log(userApp);
+      .then(() => {
         dispatch(userActive(user))
         navigate('/')
       })

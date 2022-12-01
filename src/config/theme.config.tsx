@@ -6,9 +6,10 @@ type ThemeProp = {
 }
 
 enum themePalette {
-  BG = "white",
-  BLUE = "#2A94FF",
-  BLACKZUL = "#436587",
+  BG = "#414141",
+  GREEN = "#EAFF00",
+  WHITE = "#FFFFFF",
+  BLACK = "#1A1A1A",
   FONT_GLOBAL = "'JetBrains Mono', monospace",
   ERROR_MAIN = "#f44336",
   BG_ERROR_MAIN = "rgba(244,67,54,0.1)",
@@ -16,29 +17,43 @@ enum themePalette {
   BG_SUCCESS_MAIN = "rgba(60,60,60,60,0.1)"
 }
 
-const theme = createTheme({
+export const theme = createTheme({
   palette: {
     background: {
-      default: themePalette.BG
+      default: themePalette.WHITE
     },
     primary: {
-      main: themePalette.BLUE
+      main: themePalette.BLACK,
+      dark: themePalette.GREEN,
+      light: themePalette.WHITE,
     },
     secondary: {
-      main: themePalette.BLACKZUL
-    }
+      main: themePalette.GREEN
+    },
   },
   typography: {
     fontFamily: themePalette.FONT_GLOBAL,
+    allVariants:{
+      color: "white"
+    }
   },
   components: {
     MuiButton: {
+      styleOverrides:{
+        contained:{
+          backgroundColor: themePalette.WHITE,
+          "&:hover": {
+            backgroundColor: themePalette.BLACK,
+            color:themePalette.WHITE
+          },
+        }
+      },
       defaultProps: {
         style: {
           textTransform: "none",
           boxShadow: "none",
           borderRadius: "0.5em",
-        }
+        },
       }
     },
   }

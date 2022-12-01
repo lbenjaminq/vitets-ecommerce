@@ -1,5 +1,5 @@
 import { Box, AppBar, Toolbar, Typography, Button, IconButton } from '@mui/material'
-// import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { BsFillCartFill } from 'react-icons/bs'
 import { Link, useNavigate } from 'react-router-dom';
 import { signOut, getAuth } from 'firebase/auth'
 import { useAppDispatch } from '../../redux/hooks';
@@ -25,8 +25,7 @@ export const Navbar = () => {
           </Typography>
           <Link to="/checkout">
             <IconButton>
-              CART
-              {/* <ShoppingCartIcon sx={{ color: "white" }} fontSize="large" /> */}
+              <BsFillCartFill style={{color:"white"}} />
             </IconButton>
           </Link>
           <Button color="inherit" onClick={logout}>Logout</Button>
