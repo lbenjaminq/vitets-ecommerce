@@ -6,45 +6,47 @@ type ThemeProp = {
 }
 
 enum themePalette {
-  BG = "#414141",
-  GREEN = "#EAFF00",
+  BG = "#1b262c",
+  BLUE = "rgba(29,221,255,0.9)",
+  BLUE_LIGHT = "rgba(137,237,255,1)",
   WHITE = "#FFFFFF",
   BLACK = "#1A1A1A",
   FONT_GLOBAL = "'JetBrains Mono', monospace",
   ERROR_MAIN = "#f44336",
   BG_ERROR_MAIN = "rgba(244,67,54,0.1)",
-  SUCCESS_MAIN = "green",
+  SUCCESS_MAIN = "BLUE",
   BG_SUCCESS_MAIN = "rgba(60,60,60,60,0.1)"
 }
 
 export const theme = createTheme({
   palette: {
-    background: {
-      default: themePalette.WHITE
-    },
     primary: {
       main: themePalette.BLACK,
-      dark: themePalette.GREEN,
+      dark: themePalette.BLUE,
       light: themePalette.WHITE,
     },
     secondary: {
-      main: themePalette.GREEN
+      main: themePalette.WHITE
     },
   },
   typography: {
     fontFamily: themePalette.FONT_GLOBAL,
-    allVariants: {
-      color: "white"
-    }
   },
   components: {
     MuiButton: {
       styleOverrides: {
         contained: {
-          backgroundColor: themePalette.WHITE,
+          backgroundColor: themePalette.BLUE,
+          color: themePalette.WHITE,
           "&:hover": {
-            backgroundColor: themePalette.BLACK,
-            color: themePalette.WHITE
+            backgroundColor: themePalette.WHITE,
+            color: themePalette.BLACK,
+            textDecoration: "underline"
+          },
+        },
+        outlined: {
+          "&:hover": {
+            border: `1px ${themePalette.BLUE} solid`
           },
         }
       },
@@ -53,6 +55,7 @@ export const theme = createTheme({
           textTransform: "none",
           boxShadow: "none",
           borderRadius: "0.5em",
+          padding: "2px 10px"
         },
       }
     },

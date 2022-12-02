@@ -29,7 +29,7 @@ export const Home = () => {
         <Search />
         <FilterPrice price={price} setPrice={setPrice} />
         <FilterCategory categorySelected={categorySelected} setCategorySelected={setCategorySelected} />
-        <Button variant="outlined" color="primary" onClick={handleReset}>reset filters</Button>
+        <Button variant="contained" color="primary" onClick={handleReset}>reset filters</Button>
       </Stack>
       <Grid
         container

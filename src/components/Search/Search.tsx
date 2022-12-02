@@ -22,9 +22,9 @@ export const Search = () => {
   return (
     <FormControl sx={{ width: '25ch', display: "flex" }}>
       <Stack direction="row" alignItems="center">
-        <OutlinedInput placeholder="Search.." onChange={handleChange} value={productInput} />
-        <CgSearchLoading onClick={handleOnClick} color="black"
-          style={{ fontSize: "2rem" }} />
+        <OutlinedInput sx={{ color: "black", background: "white" }} color="secondary" placeholder="Search.." onChange={handleChange} value={productInput} />
+        <CgSearchLoading onClick={handleOnClick} color="white"
+          style={{ fontSize: "2rem", cursor: "pointer" }} />
       </Stack>
     </FormControl>
   )

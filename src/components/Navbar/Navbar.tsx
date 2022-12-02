@@ -28,7 +28,7 @@ export const Navbar = () => {
               <BsFillCartFill style={{ color: "white" }} />
             </IconButton>
           </Link>
-          <Button color="inherit" onClick={logout}>Logout</Button>
+          <Button variant="contained" color="inherit" onClick={logout}>Logout</Button>
         </Toolbar>
       </AppBar>
     </Box>

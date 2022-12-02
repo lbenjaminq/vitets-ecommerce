@@ -27,7 +27,7 @@ export const FilterCategory: React.FC<Props> = ({ categorySelected, setCategoryS
   }, [])
 
   return (
-    <FormControl variant="outlined" sx={{ width: "120px" }}>
+    <FormControl variant="outlined" sx={{ width: "120px", background: "white" }}>
       <InputLabel sx={{ color: "black" }} id="demo-simple-select-label">Category</InputLabel>
       <Select
         labelId="demo-simple-select-label"

@@ -18,7 +18,7 @@ export const FilterPrice: React.FC<Props> = ({ price, setPrice }) => {
   }
 
   return (
-    <FormControl variant="outlined" sx={{ width: "100px" }}>
+    <FormControl variant="outlined" sx={{ width: "100px", background: "white" }}>
       <InputLabel sx={{ color: "black" }} id="demo-simple-select-label">Price</InputLabel>
       <Select
         labelId="demo-simple-select-label"
