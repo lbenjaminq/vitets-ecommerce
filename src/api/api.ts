@@ -24,7 +24,7 @@ const api = {
   getProductCategory: async (category: string) => {
     const request = await axios(`${BASE_URL}/products/category/${category}`);
     return request.data.products;
-  }
+  },
 };
 
 export default api;

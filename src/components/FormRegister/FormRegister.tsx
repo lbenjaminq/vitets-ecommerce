@@ -25,11 +25,12 @@ export const FormRegister: React.FC<Props> = ({
   const auth = getAuth();
   const navigate = useNavigate();
 
+
   const [newAccount, setNewAccount] = React.useState<UserAccount>({
     email: "",
     password: "",
     address: "",
-    cellphone: 0
+    cellphone: ''
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

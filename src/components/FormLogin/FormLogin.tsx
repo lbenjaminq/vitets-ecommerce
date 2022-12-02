@@ -1,5 +1,11 @@
 import React from 'react';
 import { Container, Grid, Paper, Box, Typography, TextField, Button } from '@mui/material';
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from '@/config/firebase';
+import { useNavigate } from 'react-router';
+import { useAppDispatch } from '@/redux';
+import { userActive } from '@/redux/slices/user.slice';
+
 
 interface Props {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -8,6 +14,27 @@ interface Props {
 }
 
 export const FormLogin: React.FC<Props> = ({ handleChange, handleLogin, handleOpen }) => {
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+  const provider = new GoogleAuthProvider();
+  provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+  provider.setCustomParameters({
+    'login_hint': 'user@example.com'
+  });
+
+  const loginWithGoogle = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const { email, uid } = result.user;
+        if (email && uid) {
+          dispatch(userActive({ email, uid }))
+        }
+        navigate('/')
+      }).catch((error) => {
+        console.log(error.message);
+      });
+  }
+
   return (
     <Container>
       <Grid
@@ -44,6 +71,7 @@ export const FormLogin: React.FC<Props> = ({ handleChange, handleLogin, handleOp
               >
                 Login
               </Button>
+              <Button onClick={loginWithGoogle} >With Google</Button>
               <Button onClick={handleOpen} variant="outlined" >Register</Button>
             </Box>
           </Paper>

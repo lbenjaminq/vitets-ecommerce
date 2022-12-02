@@ -32,10 +32,16 @@ export interface UserAccount {
   email: string;
   password: string;
   address: string;
-  cellphone: number;
+  cellphone: string;
 }
 
 export interface UserActive {
+  uid: string;
   email: string;
   password: string;
+}
+
+export interface UserLocalStorage {
+  uid: string;
+  email: string;
 }

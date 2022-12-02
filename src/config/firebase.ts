@@ -1,3 +1,6 @@
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+
 const firebaseConfig = {
   apiKey: "AIzaSyAsgtL5SdmjcHXoSQlJff__h48D5B2KkcE",
   authDomain: "ecommerce-ts-vite.firebaseapp.com",
@@ -9,3 +12,8 @@ const firebaseConfig = {
 };
 
 export default firebaseConfig;
+
+const app = initializeApp(firebaseConfig);
+
+export const auth = getAuth(app);
+

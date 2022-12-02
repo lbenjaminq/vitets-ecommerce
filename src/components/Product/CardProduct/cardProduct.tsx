@@ -8,13 +8,14 @@ import {
   Button,
   Typography
 } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BsFillCartPlusFill } from 'react-icons/bs';
+import { MdDownloadDone } from 'react-icons/md'
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '@/redux';
 import { addToCart } from '@/redux/slices/cart.slice';
-import { setItem } from '@/localstorage/useLocalStorage';
+import { setItem } from '@/utilities/useLocalStorage';
 import { Product } from '@/types/types';
 
 interface Props {
@@ -25,12 +26,15 @@ export const CardProduct: React.FC<Props> = ({ product }) => {
   const dispatch = useDispatch();
   const productsCart = useAppSelector(state => state.cartProducts);
 
+  const [disabledBtn, setdisabledBtn] = useState(false)
+
   const addToCartProduct = () => {
     const { id, brand, title, price, thumbnail, stock } = product;
     dispatch(addToCart({ id, brand, title, price, thumbnail, stock, amount: 1 }));
   };
 
   useEffect(() => {
+    setdisabledBtn(productsCart.some((item) => item.id === product.id));
     setItem('cart', productsCart);
   }, [productsCart])
 
@@ -62,8 +66,13 @@ export const CardProduct: React.FC<Props> = ({ product }) => {
         </Link>
         <Stack direction="row" alignItems="center">
           <CardActions disableSpacing>
-            <IconButton aria-label="add to cart" onClick={addToCartProduct}>
-              <BsFillCartPlusFill color="white" />
+            <IconButton aria-label="add to cart" onClick={addToCartProduct} disabled={disabledBtn}>
+              {
+                disabledBtn ?
+                  <MdDownloadDone color="white" />
+                  :
+                  <BsFillCartPlusFill color="white" />
+              }
             </IconButton>
           </CardActions>
           <Typography>${product.price}</Typography>

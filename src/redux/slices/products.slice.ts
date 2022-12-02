@@ -17,9 +17,9 @@ export const productSlice = createSlice({
       state.productsClean = action.payload;
     },
 
-    getProductById: (state, action) => state.productDetail = action.payload,
+    getProductById: (state, action) => { state.productDetail = action.payload },
 
-    getProductBySearch: (state, action) => state.products = action.payload,
+    getProductBySearch: (state, action) => { state.products = action.payload },
 
     priceFilter: (state, action: PayloadAction<Price>) => {
       if (action.payload === 'cheap') {
@@ -33,9 +33,9 @@ export const productSlice = createSlice({
       }
     },
 
-    categoryFilter: (state, action) => state.products = action.payload,
+    categoryFilter: (state, action) => { state.products = action.payload },
 
-    cleanState: (state) => state = initialStateProducts,
+    cleanState: (state) => { state = initialStateProducts },
   }
 })
 

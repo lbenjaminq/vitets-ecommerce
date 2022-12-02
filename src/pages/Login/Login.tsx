@@ -8,10 +8,11 @@ import { UserActive } from '../../types/types';
 import { useNavigate } from 'react-router';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { userActive } from '../../redux/slices/user.slice';
-import { setItem } from '../../localstorage/useLocalStorage';
+import { setItem } from '../../utilities/useLocalStorage';
 
 const initialState = {
   email: "",
+  uid: "",
   password: ""
 };
 
@@ -42,8 +43,11 @@ export const Login = () => {
 
   const handleLogin = (e: React.MouseEvent) => {
     return signInWithEmailAndPassword(auth, user.email, user.password)
-      .then(() => {
-        dispatch(userActive(user))
+      .then((userFirebase) => {
+        const { email, uid } = userFirebase.user
+        if (email && uid) {
+          dispatch(userActive({ email, uid }))
+        }
         navigate('/')
       })
       .catch((error) => {

@@ -1,20 +1,20 @@
-import { getItem } from '@/localstorage/useLocalStorage';
-import { UserActive } from '@/types/types';
+import { getItem } from '@/utilities/useLocalStorage';
+import { UserLocalStorage } from '@/types/types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const initialState: UserActive = getItem('user') || { email: "", password: "" };
+const initialState: UserLocalStorage = getItem('user') || { email: "", uid: "" };
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    userActive: (state, action: PayloadAction<UserActive>) => {
-      const { email, password } = action.payload;
-      state = { email, password };
+    userActive: (state, action: PayloadAction<UserLocalStorage>) => {
+      const { email, uid } = action.payload;
+      state = { email, uid };
       return state;
     },
 
-    userSignOut: () => initialState,
+    userSignOut: () => { return { email: "", uid: "" } },
   }
 })
 

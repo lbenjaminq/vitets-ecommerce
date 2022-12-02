@@ -1,4 +1,4 @@
-import { sumTotal } from '@/helpers/sumTotal';
+import { sumTotal } from '@/utilities/sumTotal';
 import { useAppDispatch, useAppSelector } from '@/redux';
 import { addToCart, removeToCart } from '@/redux/slices/cart.slice';
 import { CartProduct } from '@/types/types';
