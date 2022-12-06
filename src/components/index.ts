@@ -1,5 +1,6 @@
 export * from './Cart';
 export * from './Filters';
+export * from './Footer';
 export * from './FormLogin';
 export * from './FormRegister';
 export * from './Navbar';
