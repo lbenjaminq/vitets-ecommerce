@@ -3,9 +3,22 @@
   height: fit-content;
 }
 
+.imageProduct {
+  object-fit: cover;
+  width: 70%;
+  height: 60%;
+  margin: auto;
+}
+
 @media screen and (max-width: 500px) {
   .img {
-    border: 2px solid red;
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .imageProduct {
+    width: 60%;
+    height: 60%;
   }
 }

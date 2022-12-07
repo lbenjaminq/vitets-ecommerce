@@ -1,17 +1,15 @@
 import { useEffect, useState } from 'react';
-import { Stack, Box, Grid, Typography } from '@mui/material';
+import { Stack, Box, Grid, Typography, Container, Button, Divider, TextField } from '@mui/material';
 import { useParams } from 'react-router';
 import { getProductByCategory, getProductByIdAction, useAppDispatch, useAppSelector } from '@/redux';
 import { cleanState } from '@/redux/slices/products.slice';
 import style from './CardDetail.module.css'
 import { CardProduct } from '@/components';
-import { ContainerLayout } from '@/styled-components/ContainerLayout';
 import Slider from "react-slick";
 
 export const CardDetail = () => {
 
   const settings = {
-    dots: true,
     infinite: false,
     speed: 700,
     slidesToShow: 4,
@@ -19,7 +17,7 @@ export const CardDetail = () => {
     initialSlide: 0,
     responsive: [
       {
-        breakpoint: 1604,
+        breakpoint: 1704,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
@@ -28,7 +26,7 @@ export const CardDetail = () => {
         }
       },
       {
-        breakpoint: 600,
+        breakpoint: 1450,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
@@ -36,7 +34,7 @@ export const CardDetail = () => {
         }
       },
       {
-        breakpoint: 480,
+        breakpoint: 950,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1
@@ -44,12 +42,12 @@ export const CardDetail = () => {
       }
     ]
   };
-
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const product = useAppSelector(state => state.products.productDetail);
-  const [similarWord, setSimilarWord] = useState(product?.category)
-  const similarProducts = useAppSelector(state => state.products.products)
+  const [similarWord, setSimilarWord] = useState(product?.category);
+  const similarProducts = useAppSelector(state => state.products.products);
+  console.log("PRODUCT", product?.images)
 
   useEffect(() => {
     if (id) {
@@ -62,77 +60,82 @@ export const CardDetail = () => {
     if (product) {
       setSimilarWord(product.category)
     }
-  }, [product])
+  }, [product]);
 
   useEffect(() => {
     if (similarWord) {
       dispatch(getProductByCategory(similarWord))
     };
-  }, [similarWord])
+  }, [similarWord]);
 
   return (
-    <ContainerLayout>
-      <Box component="div" sx={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        width: "100%",
-        height: "calc(100vh - 64px)",
-        fontFamily: "sans-serif"
-      }}>
-        <Grid container sx={{ display: "flex", border: "2px solid red", backgroundColor: "#f5f5f5", width: { xs: "100%", md: "1200px" } }} >
-          <Grid item lg="auto">
-            <img src={product?.images[0]} className={style.img} />
-          </Grid>
-          <Grid lg="auto" item sx={{ color: "black", border: "2px solid red", width: { xs: "100%", md: "50%" } }}>
-            <Typography variant="h3" >{product?.title}</Typography>
-            <Typography variant="h5" >{product?.brand}</Typography>
-            <Grid container >
-              <Grid item sx={{ margin: "20px 0px" }}>
-                <Stack spacing={6} direction="row">
-                  <Stack spacing={4}>
-                    <Typography>
-                      <strong>Rating: </strong>
-                      {product?.rating}
-                    </Typography>
-                    <Typography>
-                      <strong>Price: </strong>
-                      ${product?.price}
-                    </Typography>
-                  </Stack>
-                  <Stack spacing={4}>
-                    <Typography >
-                      <strong>Category: </strong>
-                      {product?.category}
-                    </Typography>
-                    <Typography>
-                      <strong>In Stock: </strong>
-                      {product?.stock}
-                    </Typography>
-                  </Stack>
-                </Stack>
-              </Grid>
-            </Grid>
-            <Stack>
-              <strong>Description: </strong>
-              {product?.description}
-            </Stack>
-          </Grid>
-        </Grid>
+    <>
+      <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "column", lg: "row" }, justifyContent: "center", alignItems: "center", marginBottom: "5%", backgroundColor: "#a5a5a5", position: "relative" }}>
+        <Stack sx={{ width: { md: "70%", lg: "50%" }, display: "flex" }}>
+          <img src={product?.thumbnail} className={style.imageProduct} />
+        </Stack>
+        <Stack spacing={6} sx={{ backgroundColor: "#f5f5f5", padding: "2%", width: { md: "100%", lg: "50%" } }}>
+          <Typography sx={{ fontSize: "2rem" }}>
+            {product?.title}
+          </Typography>
+          <Typography>
+            {product?.brand}
+          </Typography>
+          <Typography>
+            {product?.rating}⭐
+          </Typography>
+          <Typography sx={{ fontSize: "1.4rem" }}>
+            ${product?.price} ({product?.discountPercentage}% OFF)
+          </Typography>
+          <Button variant="contained">
+            Add to cart
+          </Button>
+          <Divider sx={{ background: "white", marginTop: "2%" }} />
+          <Typography sx={{ fontSize: "1.6rem" }}>
+            PRODUCT DETAILS
+          </Typography>
+          <Typography>
+            {product?.description}
+          </Typography>
+          <Divider sx={{ background: "white", margin: "2%" }} />
+          <Typography >
+            <strong>Category: </strong>
+            {product?.category}
+          </Typography>
+          <Typography>
+            <strong>In Stock: </strong>
+            {product?.stock}
+          </Typography>
+          <Typography sx={{ fontSize: "1.6rem" }}>
+            DELIVERY OPTIONS
+          </Typography>
+          <TextField placeholder='PIN CODE' />
+          <Typography>
+            100% Original Products
+          </Typography>
+          <Typography>Pay on delivery might be available</Typography>
+          <Typography>Easy 30 days returns and exchanges</Typography>
+          <Typography>Try & Buy might be available</Typography>
+        </Stack>
       </Box>
-      {
-        similarWord &&
-        similarProducts.length &&
-        <Box sx={{ border: "2px solid red", margin: "auto", width: "90%" }}>
-          <Slider {...settings}>
-            {
-              similarProducts?.map(product => (
-                <CardProduct key={product.id} product={product} />
-              ))
-            }
-          </Slider>
-        </Box>
-      }
-    </ContainerLayout>
+      <Box>
+        <Typography sx={{ fontSize: "2rem", color: "#fff", textAlign: "center" }}>
+          SIMILAR PRODUCTS
+        </Typography>
+        {
+          similarWord &&
+          similarProducts.length &&
+          <Box sx={{ margin: "auto", width: "80%" }}>
+            <Slider {...settings} >
+              {
+                similarProducts?.map(product => (
+                  <CardProduct key={product.id} product={product} />
+                ))
+              }
+            </Slider>
+          </Box>
+        }
+      </Box>
+    </>
   )
 }

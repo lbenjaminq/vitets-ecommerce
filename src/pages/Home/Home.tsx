@@ -23,7 +23,7 @@ export const Home = () => {
   }, []);
 
   return (
-    <Container maxWidth={false}>
+    <Container maxWidth="xl" sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
       <Stack direction="row" spacing={12} sx={{ marginTop: "20px" }}>
         <Search />
         <FilterPrice price={price} setPrice={setPrice} />
@@ -32,12 +32,12 @@ export const Home = () => {
       </Stack>
       <Grid
         container
-        rowSpacing={4}
-        columnSpacing={{ xs: 1, sm: 2, md: 4 }}
-        sx={{ margin: "auto" }}
+        spacing={4}
+        sx={{ margin: "auto", justifyContent: "center" }}
+        wrap={'wrap'}
       >
         {products?.map((product) => (
-          <Grid key={product.id} item>
+          <Grid key={product.id} item >
             <CardProduct product={product} />
           </Grid>
         ))}
