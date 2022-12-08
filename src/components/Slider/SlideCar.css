@@ -1,3 +1,35 @@
-.imageSlide {
+.container {
+  margin: auto;
+}
+
+.containedSlide {
   margin-top: 5%;
+  height: 450px;
+  margin: auto;
+  object-position: center;
+}
+
+.imageSlide {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  margin: auto;
+}
+
+@media screen and (max-width: 1900px) {
+  .container {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .container {
+    display: none;
+    height: 250px;
+    margin-bottom: 10%;
+  }
+  .imageSlide {
+    height: 250px;
+  }
 }

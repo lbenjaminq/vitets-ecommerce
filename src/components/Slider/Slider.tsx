@@ -1,37 +1,39 @@
 import Slider from 'react-slick'
 import image1 from '@/assets/image.jpg'
-import image2 from '@/assets/image-2.jpg'
 import image3 from '@/assets/image-3.jpg'
-import image4 from '@/assets/image-4.jpg'
+import image5 from '@/assets/img-5.jpg'
+import image6 from '@/assets/image-6.webp'
 import "./SlideCar.css"
-import { Container } from '@mui/material'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+import { Box } from '@mui/material'
+
+const images = [image1, image3, image5, image6]
 
 export const SliderComponent = () => {
 
   const settings = {
-    fade: true,
+    dots: true,
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000,
-    cssEase: "linear"
+    autoplaySpeed: 4000,
   };
 
   return (
-    <Slider {...settings} className="imageSlide">
-      <div>
-        <img src={image1} style={{ height: "100%", width: "1300px", margin: "auto" }} />
-      </div>
-      <div>
-        <img src={image2} style={{ width: "1300px", margin: "auto" }} />
-      </div>
-      <div>
-        <img src={image3} style={{ width: "1300px", margin: "auto" }} />
-      </div>
-      <div>
-        <img src={image4} style={{ width: "1300px", margin: "auto" }} />
-      </div>
-    </Slider>
+    <Box >
+      <Slider {...settings} className="container">
+        {
+          images.map(image => (
+            <div key={image} className="containedSlide">
+              <LazyLoadImage
+                className='imageSlide'
+                src={image}
+              />
+            </div>
+          ))
+        }
+      </Slider >
+    </Box>
   )
 }

@@ -56,7 +56,7 @@ export const Rows: React.FC<Props> = ({ category }) => {
 
 
   return (
-    <Box sx={{ margin: "3%" }}>
+    <Box sx={{ margin: { xs: "10%", sm: "4%" } }}>
       {
         loading ?
           <Typography>Cargando</Typography>

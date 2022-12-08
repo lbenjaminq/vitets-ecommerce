@@ -17,6 +17,7 @@ import { useAppSelector } from '@/redux';
 import { addToCart } from '@/redux/slices/cart.slice';
 import { setItem } from '@/utilities/useLocalStorage';
 import { Product } from '@/types/types';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 interface Props {
   product: Product;
@@ -39,7 +40,7 @@ export const CardProduct: React.FC<Props> = ({ product }) => {
   }, [productsCart])
 
   return (
-    <Card sx={{ backgroundColor: "white", width: { xs: "100%", sm: "300px", md: "380px" } }}>
+    <Card sx={{ backgroundColor: "white", height: "260px", width: { xs: "100%", sm: "300px", md: "380px" } }}>
       <Stack
         direction="row"
         justifyContent="space-between"
@@ -50,12 +51,10 @@ export const CardProduct: React.FC<Props> = ({ product }) => {
           title={product.title}
           subheader={product.brand}
         />
-        <CardMedia
-          component="img"
+        <LazyLoadImage
           height="194"
-          image={product.images[0]}
+          src={product.images[0]}
           alt={product.title}
-          sx={{ objectFit: "cover" }}
         />
       </Stack>
       <Stack direction="row" alignItems="center" justifyContent="space-around">

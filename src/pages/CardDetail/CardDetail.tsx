@@ -13,6 +13,7 @@ import { TiStar } from 'react-icons/ti';
 import { TbBus, TbListDetails } from 'react-icons/tb'
 import { RiLuggageCartLine } from 'react-icons/ri';
 import { Product } from '@/types/types';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 export const CardDetail = () => {
 
@@ -53,7 +54,7 @@ export const CardDetail = () => {
     <Container maxWidth={false}>
       <Box sx={BoxContainer}>
         <Stack sx={StackImg}>
-          <img src={product?.thumbnail} className={style.imageProduct} />
+          <LazyLoadImage src={product?.thumbnail} className={style.imageProduct} />
         </Stack>
         <Stack
           spacing={6}
