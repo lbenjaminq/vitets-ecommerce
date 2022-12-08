@@ -14,10 +14,9 @@ import { MdDownloadDone } from 'react-icons/md'
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '@/redux';
-import { addToCart } from '@/redux/slices/cart.slice';
-import { setItem } from '@/utilities/useLocalStorage';
 import { Product } from '@/types/types';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { addToCartProduct } from '@/utilities';
 
 interface Props {
   product: Product;
@@ -29,15 +28,10 @@ export const CardProduct: React.FC<Props> = ({ product }) => {
 
   const [disabledBtn, setdisabledBtn] = useState(false)
 
-  const addToCartProduct = () => {
-    const { id, brand, title, price, thumbnail, stock } = product;
-    dispatch(addToCart({ id, brand, title, price, thumbnail, stock, amount: 1 }));
-  };
 
   useEffect(() => {
     setdisabledBtn(productsCart.some((item) => item.id === product.id));
-    setItem('cart', productsCart);
-  }, [productsCart])
+  }, [productsCart]);
 
   return (
     <Card sx={{ backgroundColor: "white", height: "260px", width: { xs: "100%", sm: "300px", md: "380px" } }}>
@@ -65,7 +59,7 @@ export const CardProduct: React.FC<Props> = ({ product }) => {
           </Button >
         </Link>
         <CardActions disableSpacing>
-          <IconButton aria-label="add to cart" onClick={addToCartProduct} disabled={disabledBtn}>
+          <IconButton aria-label="add to cart" onClick={() => addToCartProduct(product, dispatch)} disabled={disabledBtn}>
             {
               disabledBtn ?
                 <MdDownloadDone color="black" />

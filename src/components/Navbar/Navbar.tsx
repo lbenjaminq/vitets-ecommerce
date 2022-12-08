@@ -46,21 +46,6 @@ export const Navbar = () => {
   };
 
   return (
-    // <Box sx={{ flexGrow: 1 }}>
-    //   <AppBar position="static" color="primary">
-    //     <Toolbar>
-    //       <Typography variant="h6" component="div">
-    //         ECOMMENJA
-    //       </Typography>
-    //       <Link to="/home">
-    //         <Typography >
-    //           SEARCH
-    //         </Typography>
-    //       </Link>
-    //       <Button variant="contained" color="inherit" onClick={logout}>Logout</Button>
-    //     </Toolbar>
-    //   </AppBar>
-    // </Box>
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>

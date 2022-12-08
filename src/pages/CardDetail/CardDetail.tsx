@@ -4,16 +4,15 @@ import { settings } from '@/config/react-slick';
 import { CardProduct } from '@/components';
 import { Stack, Box, Typography, Container, Button, TextField } from '@mui/material';
 import { cleanState } from '@/redux/slices/products.slice';
-import { addToCart } from '@/redux/slices/cart.slice';
 import Slider from 'react-slick';
 import style from './CardDetail.module.css';
 import { getProductByCategory, getProductByIdAction, useAppDispatch, useAppSelector } from '@/redux';
 import { SDivider } from '@/styled-components/Divider';
 import { TiStar } from 'react-icons/ti';
-import { TbBus, TbListDetails } from 'react-icons/tb'
+import { TbBus, TbListDetails } from 'react-icons/tb';
 import { RiLuggageCartLine } from 'react-icons/ri';
-import { Product } from '@/types/types';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { addToCartProduct } from '@/utilities';
 
 export const CardDetail = () => {
 
@@ -22,31 +21,18 @@ export const CardDetail = () => {
   const product = useAppSelector(state => state.products.productDetail);
   const similarProducts = useAppSelector(state => state.products.products);
 
-  const [similarWord, setSimilarWord] = useState(product?.category);
-
-  const addToCartProduct = (productCart: Product) => {
-    const { id, brand, title, price, thumbnail, stock } = productCart;
-    dispatch(addToCart({ id, brand, title, price, thumbnail, stock, amount: 1 }));
-  };
-
   useEffect(() => {
     if (id) {
       dispatch(getProductByIdAction(id));
     };
     return () => { dispatch(cleanState()) };
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   useEffect(() => {
     if (product) {
-      setSimilarWord(product.category);
+      dispatch(getProductByCategory(product.category));
     }
   }, [product]);
-
-  useEffect(() => {
-    if (similarWord) {
-      dispatch(getProductByCategory(similarWord));
-    };
-  }, [similarWord]);
 
   if (!product) return <>Loading</>
 
@@ -83,7 +69,7 @@ export const CardDetail = () => {
           <Button
             variant="contained"
             sx={{ width: "200px", fontSize: "1.2em" }}
-            onClick={() => addToCartProduct(product)}
+            onClick={() => addToCartProduct(product, dispatch)}
           >
             ADD TO CART
             <RiLuggageCartLine
@@ -140,7 +126,6 @@ export const CardDetail = () => {
           SIMILAR PRODUCTS
         </Typography>
         {
-          similarWord &&
           similarProducts.length &&
           <Box sx={{ margin: "auto", width: "80%" }}>
             <Slider {...settings} >

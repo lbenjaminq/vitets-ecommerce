@@ -3,6 +3,8 @@ import { useAppDispatch, useAppSelector } from '@/redux';
 import { addToCart, removeToCart } from '@/redux/slices/cart.slice';
 import { CartProduct } from '@/types/types';
 import { List, ListItem, ListItemAvatar, Avatar, ListItemText, Typography, IconButton, Box, Paper } from '@mui/material';
+import { useEffect } from 'react';
+import { setItem } from '@/utilities';
 
 export const Cart = () => {
   const dispatch = useAppDispatch();
@@ -11,6 +13,10 @@ export const Cart = () => {
   const addToCartProducts = (item: CartProduct) => {
     dispatch(addToCart(item));
   }
+
+  useEffect(() => {
+    setItem('cart', product);
+  }, [product]);
 
   const removeToCartProduct = (item: CartProduct) => {
     dispatch(removeToCart(item));
