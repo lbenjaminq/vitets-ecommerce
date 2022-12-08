@@ -66,7 +66,7 @@ export const Rows: React.FC<Props> = ({ category }) => {
             <Slider {...settings} className="SliderRow">
               {products.length &&
                 products?.map((product) => (
-                  <CardProduct product={product} />
+                  <CardProduct key={product.id} product={product} />
                 ))
               }
             </Slider>

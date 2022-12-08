@@ -11,7 +11,8 @@ enum themePalette {
   BLUE_LIGHT = "rgba(137,237,255,1)",
   WHITE = "#FFFFFF",
   BLACK = "#1A1A1A",
-  FONT_GLOBAL = "'JetBrains Mono', monospace",
+  ROSE = '#ff3f6c',
+  FONT_GLOBAL = "'Roboto Flex', sans-serif",
   ERROR_MAIN = "#f44336",
   BG_ERROR_MAIN = "rgba(244,67,54,0.1)",
   SUCCESS_MAIN = "BLUE",
@@ -36,7 +37,8 @@ export const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         contained: {
-          backgroundColor: themePalette.BLUE,
+          fontFamily: "'Montserrat', sans-serif",
+          backgroundColor: themePalette.ROSE,
           color: themePalette.WHITE,
           "&:hover": {
             backgroundColor: themePalette.WHITE,
@@ -55,7 +57,7 @@ export const theme = createTheme({
           textTransform: "none",
           boxShadow: "none",
           borderRadius: "0.5em",
-          padding: "2px 10px"
+          padding: "10px 10px"
         },
       }
     },

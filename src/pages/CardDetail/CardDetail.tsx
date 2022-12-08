@@ -1,53 +1,32 @@
 import { useEffect, useState } from 'react';
-import { Stack, Box, Typography, Container, Button, Divider, TextField } from '@mui/material';
 import { useParams } from 'react-router';
-import { getProductByCategory, getProductByIdAction, useAppDispatch, useAppSelector } from '@/redux';
-import { cleanState } from '@/redux/slices/products.slice';
-import style from './CardDetail.module.css'
+import { settings } from '@/config/react-slick';
 import { CardProduct } from '@/components';
-import Slider from "react-slick";
-import { TiStar } from 'react-icons/ti'
+import { Stack, Box, Typography, Container, Button, TextField } from '@mui/material';
+import { cleanState } from '@/redux/slices/products.slice';
+import { addToCart } from '@/redux/slices/cart.slice';
+import Slider from 'react-slick';
+import style from './CardDetail.module.css';
+import { getProductByCategory, getProductByIdAction, useAppDispatch, useAppSelector } from '@/redux';
+import { SDivider } from '@/styled-components/Divider';
+import { TiStar } from 'react-icons/ti';
+import { TbBus, TbListDetails } from 'react-icons/tb'
+import { RiLuggageCartLine } from 'react-icons/ri';
+import { Product } from '@/types/types';
 
 export const CardDetail = () => {
 
-  const settings = {
-    infinite: false,
-    speed: 700,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    initialSlide: 0,
-    responsive: [
-      {
-        breakpoint: 1704,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true
-        }
-      },
-      {
-        breakpoint: 1450,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2
-        }
-      },
-      {
-        breakpoint: 950,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
-  };
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const product = useAppSelector(state => state.products.productDetail);
-  const [similarWord, setSimilarWord] = useState(product?.category);
   const similarProducts = useAppSelector(state => state.products.products);
+
+  const [similarWord, setSimilarWord] = useState(product?.category);
+
+  const addToCartProduct = (productCart: Product) => {
+    const { id, brand, title, price, thumbnail, stock } = productCart;
+    dispatch(addToCart({ id, brand, title, price, thumbnail, stock, amount: 1 }));
+  };
 
   useEffect(() => {
     if (id) {
@@ -58,23 +37,28 @@ export const CardDetail = () => {
 
   useEffect(() => {
     if (product) {
-      setSimilarWord(product.category)
+      setSimilarWord(product.category);
     }
   }, [product]);
 
   useEffect(() => {
     if (similarWord) {
-      dispatch(getProductByCategory(similarWord))
+      dispatch(getProductByCategory(similarWord));
     };
   }, [similarWord]);
 
+  if (!product) return <>Loading</>
+
   return (
     <Container maxWidth={false}>
-      <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "column", lg: "row" }, justifyContent: "space-around", alignItems: "center", marginBottom: "5%", backgroundColor: "#a5a5a5", position: "relative" }}>
-        <Stack sx={{ width: { md: "70%", lg: "40%" }, display: "flex", backgroundColor: "#fff", border: "2px solid black", position: { sm: "relative", md: "sticky" }, top: { md: "none", lg: "0px" }, height: "90vh" }}>
+      <Box sx={BoxContainer}>
+        <Stack sx={StackImg}>
           <img src={product?.thumbnail} className={style.imageProduct} />
         </Stack>
-        <Stack spacing={6} sx={{ backgroundColor: "#f5f5f5", padding: "2%", width: { xs: "100%", md: "100%", lg: "40%" }, height: "fit-content", marginTop: "2%" }}>
+        <Stack
+          spacing={6}
+          sx={StackProduct}
+        >
           <Stack spacing={2}>
             <Typography sx={{ fontSize: "3rem" }}>
               {product?.title}
@@ -83,21 +67,40 @@ export const CardDetail = () => {
               {product?.brand} - {product?.category}
             </Typography>
           </Stack>
-          <Divider sx={{ background: "white", marginTop: "2%" }} />
-          <Stack direction="row" alignItems="center" sx={{ fontSize: "2rem" }}>
-            <TiStar style={{ fontSize: "2rem" }} />
+          <SDivider />
+          <Stack
+            direction="row"
+            alignItems="center"
+            sx={SizeMedium}
+          >
+            <TiStar style={SizeMedium} />
             {product?.rating}
           </Stack>
-          <Typography sx={{ fontSize: "1.4rem" }}>
+          <Typography sx={SizeMedium}>
             ${product?.price} ({product?.discountPercentage}% OFF)
           </Typography>
-          <Button variant="contained">
-            Add to cart
+          <Button
+            variant="contained"
+            sx={{ width: "200px", fontSize: "1.2em" }}
+            onClick={() => addToCartProduct(product)}
+          >
+            ADD TO CART
+            <RiLuggageCartLine
+              style={{ marginLeft: "4%" }}
+              size="1.4em"
+            />
           </Button>
-          <Divider sx={{ background: "white", marginTop: "2%" }} />
-          <Typography sx={{ fontSize: "2rem" }}>
-            PRODUCT DETAILS
-          </Typography>
+          <SDivider />
+          <Stack
+            direction={'row'}
+            spacing={2}
+            alignItems="center"
+          >
+            <Typography sx={SizeMedium}>
+              PRODUCT DETAILS
+            </Typography>
+            <TbListDetails size={"2em"} />
+          </Stack>
           <Typography sx={{ fontSize: "1.4rem" }}>
             {product?.description}
           </Typography>
@@ -105,12 +108,19 @@ export const CardDetail = () => {
             <strong>In Stock: </strong>
             {product?.stock} units
           </Typography>
-          <Divider sx={{ background: "white", margin: "2%" }} />
-          <Typography sx={{ fontSize: "2rem" }}>
-            DELIVERY OPTIONS
-          </Typography>
+          <SDivider />
+          <Stack
+            direction={'row'}
+            spacing={2}
+            alignItems="center"
+          >
+            <Typography sx={SizeMedium}>
+              DELIVERY OPTIONS
+            </Typography>
+            <TbBus color='black' size={"2em"} />
+          </Stack>
           <TextField placeholder='PIN CODE' />
-          <Stack sx={{ fontSize: "2rem" }} >
+          <Stack spacing={1}>
             <Typography>100% Original Products</Typography>
             <Typography>Pay on delivery might be available</Typography>
             <Typography>Easy 30 days returns and exchanges</Typography>
@@ -119,7 +129,13 @@ export const CardDetail = () => {
         </Stack>
       </Box>
       <Box sx={{ marginBottom: "2%" }}>
-        <Typography sx={{ fontSize: "2rem", color: "#fff", textAlign: "center", margin: "2%" }}>
+        <Typography sx={{
+          fontSize: "2rem",
+          color: "#fff",
+          textAlign: "center",
+          margin: "2%"
+        }}
+        >
           SIMILAR PRODUCTS
         </Typography>
         {
@@ -138,4 +154,36 @@ export const CardDetail = () => {
       </Box>
     </Container>
   )
+}
+
+
+const BoxContainer = {
+  display: "flex",
+  flexDirection: { xs: "column", lg: "row" },
+  justifyContent: "space-evenly",
+  alignItems: "center",
+  marginBottom: "5%",
+  backgroundColor: "#a5a5a5",
+  position: "relative"
+}
+
+const StackImg = {
+  width: { md: "70%", lg: "40%" },
+  display: "flex",
+  backgroundColor: "#fff",
+  position: { sm: "relative", md: "sticky" },
+  top: { md: "none", lg: "0px" },
+  height: "90vh"
+}
+
+const StackProduct = {
+  backgroundColor: "#f5f5f5",
+  padding: "2%",
+  width: { xs: "100%", md: "100%", lg: "40%" },
+  height: "fit-content",
+  marginTop: "2%"
+}
+
+const SizeMedium = {
+  fontSize: "2rem"
 }
