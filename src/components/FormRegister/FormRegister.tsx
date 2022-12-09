@@ -4,13 +4,20 @@ import {
   TextField,
   Button,
   Typography,
-  Stack,
   Box,
+  Container,
+  CssBaseline,
+  Avatar,
+  Grid,
+  FormControlLabel,
+  Checkbox,
+  Link,
 } from '@mui/material';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { UserAccount } from '@/types/types';
+import { CgCopyright } from 'react-icons/cg';
 
 interface Props {
   open: boolean;
@@ -43,90 +50,118 @@ export const FormRegister: React.FC<Props> = ({
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, newAccount.email, newAccount.password)
-      .then(() => navigate('/login'))
+      .then((auths) => {
+        window.location.reload()
+      })
       .catch((error) => console.log(error.message));
   };
 
   return (
-    <>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-        sx={{
-          zIndex: "100",
-          width: "100vw",
-          height: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <>
-          <Box component="form" sx={{ width: "350px", height: { xs: "500px", md: "500px", lg: "500px" }, backgroundColor: "white", padding: "0 2% 2% 2%", borderRadius: "20px", display: "flex", flexDirection: "column", alignItems: "center", position: "relative" }} onSubmit={handleRegister}>
-            <AiFillCloseCircle
-              style={{ position: "absolute", right: "3px", cursor: "pointer", fontSize: "2rem" }}
-              onClick={handleClose}
-            />
-            <Typography
-              sx={{ fontSize: { xs: "1.5rem", md: "2rem" }, textAlign: "center", padding: { xs: "4% 0", md: "8% 0" } }}
-            >
-              Register to buy
-            </Typography>
-            <Stack direction="row" spacing={2}>
-              <Stack direction="column">
+    <Modal
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+      sx={{
+        zIndex: "100",
+        width: "100vw",
+        height: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <Container component="main" maxWidth="xs" sx={{ background: "white", position: "relative", borderRadius: "10px" }}>
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>s
+          </Avatar>
+          <AiFillCloseCircle
+            style={{ position: "absolute", right: "2px", top: "2px", cursor: "pointer", fontSize: "2rem" }}
+            onClick={handleClose}
+          />
+          <Typography component="h1" variant="h5">
+            Sign up
+          </Typography>
+          <Box component="form" onSubmit={handleRegister} sx={{ mt: 3 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
                 <TextField
                   fullWidth
                   label="email"
                   type="email"
-                  sx={{ mt: 2, mb: 1.5, width: "100%" }}
                   name="email"
+                  id="email"
+                  required
                   value={newAccount.email}
-                  autoComplete="off"
                   onChange={handleChange}
                 />
+              </Grid>
+              <Grid item xs={12} >
                 <TextField
                   fullWidth
                   label="password"
                   type="password"
-                  sx={{ mt: 1.5, mb: 1.5, width: "100%" }}
                   name="password"
+                  id="password"
+                  required
                   value={newAccount.password}
                   onChange={handleChange}
                 />
+              </Grid>
+              <Grid item xs={12}>
                 <TextField
                   fullWidth
                   label="address"
                   type="text"
-                  sx={{ mt: 1.5, mb: 1.5, width: "100%" }}
                   name="address"
                   value={newAccount.address}
                   onChange={handleChange}
                 />
+              </Grid>
+              <Grid item xs={12}>
                 <TextField
                   fullWidth
                   label="cellphone"
                   type="text"
-                  sx={{ mt: 1.5, mb: 1.5, width: "100%" }}
                   name="cellphone"
                   value={newAccount.cellphone}
                   onChange={handleChange}
                 />
-              </Stack>
-            </Stack>
+              </Grid>
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={<Checkbox value="allowExtraEmails" color="primary" />}
+                  label="I want to receive inspiration, marketing promotions and updates via email."
+                />
+              </Grid>
+            </Grid>
             <Button
-              variant="contained"
               type="submit"
-              sx={{ mt: 2.5 }}
-              onClick={handleRegister}
-              color="primary"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
             >
-              Registrarse
+              Sign Up
             </Button>
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link href="#" variant="body2">
+                  Already have an account? Sign in
+                </Link>
+              </Grid>
+            </Grid>
           </Box>
-        </>
-      </Modal>
-    </>
+        </Box>
+        <CgCopyright />
+      </Container>
+    </Modal>
   );
 };

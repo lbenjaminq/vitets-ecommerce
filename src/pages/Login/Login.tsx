@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { userActive } from '../../redux/slices/user.slice';
 import { setItem } from '../../utilities/useLocalStorage';
+import { ContainerLayout } from '@/styled-components/ContainerLayout';
 
 const initialState = {
   email: "",
@@ -57,7 +58,7 @@ export const Login = () => {
   };
 
   return (
-    <div>
+    <div style={{ backgroundColor: "white", height: "100vh", width: "100vw", display: "flex", alignItems: "center" }}>
       <FormLogin handleChange={handleChange} handleLogin={handleLogin} handleOpen={handleOpen} />
       <FormRegister handleClose={handleClose} handleOpen={handleOpen} open={open} />
     </div>
