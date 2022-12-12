@@ -1,28 +1,27 @@
-import React, { useEffect, useState, memo } from 'react'
-import { Box, Container, Typography } from '@mui/material'
+import React, { useEffect, useState } from 'react';
+import { Box, Container, Typography } from '@mui/material';
 import { api } from '@/api';
 import { CardProduct } from '../Product';
 import { Product } from '@/types/types';
 import Slider from "react-slick";
-import "./Rows.css"
+import "./Rows.css";
 import { Settings } from '@/config/react-slick';
 
 interface Props {
   category: string;
-}
+};
 
 export const Rows: React.FC<Props> = ({ category }) => {
 
-  const [products, setProducts] = useState<Product[]>([])
-  const [loading, setLoading] = useState(true)
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     api.getProductCategory(category).then(products => {
-      setProducts(products)
-      setLoading(false)
-    })
-  }, [category])
-
+      setProducts(products);
+      setLoading(false);
+    });
+  }, [category]);
 
   return (
     <Box sx={{ margin: { xs: "10%", sm: "4%" } }}>

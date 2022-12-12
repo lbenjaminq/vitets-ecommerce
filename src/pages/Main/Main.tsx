@@ -1,8 +1,7 @@
-import { Footer, Rows, SliderComponent } from '@/components'
-import { ContainerLayout } from '@/styled-components/ContainerLayout'
+import { Footer, Rows, SliderComponent } from '@/components';
+import { ContainerLayout } from '@/styled-components/ContainerLayout';
 
 export const Main = () => {
-
   return (
     <div>
       <ContainerLayout style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>

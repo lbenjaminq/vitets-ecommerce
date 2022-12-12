@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { BsFillCartPlusFill } from 'react-icons/bs';
-import { MdDownloadDone } from 'react-icons/md'
+import { MdDownloadDone } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '@/redux';
@@ -20,13 +20,13 @@ import { addToCartProduct } from '@/utilities';
 
 interface Props {
   product: Product;
-}
+};
 
 export const CardProduct: React.FC<Props> = ({ product }) => {
   const dispatch = useDispatch();
   const productsCart = useAppSelector(state => state.cartProducts);
 
-  const [disabledBtn, setdisabledBtn] = useState(false)
+  const [disabledBtn, setdisabledBtn] = useState(false);
 
 
   useEffect(() => {

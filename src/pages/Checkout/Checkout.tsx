@@ -1,4 +1,4 @@
-import { Cart } from "@/components"
+import { Cart } from "@/components";
 
 const Checkout = () => {
   return (

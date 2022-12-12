@@ -43,3 +43,10 @@ NAVBAR:
       },
     }),
   );
+
+
+  NAVIGATE
+
+  const navigate = useNavigate()
+
+  navigate('PublicRoutes.HOME', { replace:true }) // replace url 

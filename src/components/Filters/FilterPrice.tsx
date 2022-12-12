@@ -15,7 +15,7 @@ export const FilterPrice: React.FC<Props> = ({ price, setPrice }) => {
   const handleChange = (event: SelectChangeEvent) => {
     setPrice(event.target.value as Price);
     dispatch(priceFilter(event.target.value as Price));
-  }
+  };
 
   return (
     <FormControl variant="outlined" sx={{ width: "100px", background: "white" }}>

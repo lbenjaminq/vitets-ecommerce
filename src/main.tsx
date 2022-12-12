@@ -5,12 +5,15 @@ import { Provider } from 'react-redux'
 import store from './redux/store';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Suspense } from 'react';
 
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-    <Provider store={store}>
-        <ThemeConfig>
-            <App />
-        </ThemeConfig>
-    </Provider>
+    <Suspense fallback={<h1>Loading…</h1>}>
+        <Provider store={store}>
+            <ThemeConfig>
+                <App />
+            </ThemeConfig>
+        </Provider>
+    </Suspense>
 )

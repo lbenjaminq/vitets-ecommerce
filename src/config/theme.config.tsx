@@ -3,7 +3,7 @@ import React from "react";
 
 type ThemeProp = {
   children: JSX.Element
-}
+};
 
 enum themePalette {
   BG = "#1b262c",
@@ -62,7 +62,7 @@ export const theme = createTheme({
       }
     },
   }
-})
+});
 
 export const ThemeConfig: React.FC<ThemeProp> = ({ children }) => {
   return (

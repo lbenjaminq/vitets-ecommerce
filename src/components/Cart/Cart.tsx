@@ -12,7 +12,7 @@ export const Cart = () => {
 
   const addToCartProducts = (item: CartProduct) => {
     dispatch(addToCart(item));
-  }
+  };
 
   useEffect(() => {
     setItem('cart', product);

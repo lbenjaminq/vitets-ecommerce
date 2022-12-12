@@ -22,7 +22,7 @@ interface Props {
   open: boolean;
   handleClose: () => void;
   handleOpen: () => void;
-}
+};
 
 export const FormRegister: React.FC<Props> = ({
   open,
@@ -47,7 +47,7 @@ export const FormRegister: React.FC<Props> = ({
     e.preventDefault();
     createUserWithEmailAndPassword(auth, newAccount.email, newAccount.password)
       .then(() => {
-        window.location.reload()
+        window.location.reload();
       })
       .catch((error) => console.log(error.message));
   };

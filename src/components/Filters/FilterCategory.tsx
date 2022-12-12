@@ -20,7 +20,7 @@ export const FilterCategory: React.FC<Props> = ({ categorySelected, setCategoryS
     if (categorySelected) {
       dispatch(getProductByCategory(categorySelected));
     };
-  }, [categorySelected])
+  }, [categorySelected]);
 
   useEffect(() => {
     api.getAllCategories().then(categories => setcategories(categories));
@@ -35,7 +35,6 @@ export const FilterCategory: React.FC<Props> = ({ categorySelected, setCategoryS
         value={categorySelected}
         defaultValue={''}
         label="Category"
-        // onOpen={() => setCategorySelected('')}
         onChange={handleChange}
       >
         {

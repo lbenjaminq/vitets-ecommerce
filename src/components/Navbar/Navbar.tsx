@@ -1,48 +1,42 @@
-import { Box, AppBar, Toolbar, Typography, Button, IconButton, Menu, Tooltip, MenuItem, Avatar } from '@mui/material';
+import { Box, AppBar, Toolbar, Typography, Button, IconButton, Menu, MenuItem } from '@mui/material';
 import { BsFillCartFill } from 'react-icons/bs';
 import { Link, useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
-import { useAppDispatch } from '@/redux';
+import { useAppDispatch, useAppSelector } from '@/redux';
 import { userSignOut } from '@/redux/slices/user.slice';
 import { auth } from '@/config/firebase';
 import { Container } from '@mui/system';
 import { useState } from 'react';
+import { PublicRoutes } from '@/models/routes';
 
 interface Pages {
   title: string;
   link: string;
-}
+};
 
 const pages: Pages[] = [{ title: 'Search', link: "/home" }, { title: 'Pricing', link: "" }, { title: 'Blog', link: "" }];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const logout = () => {
+  const user = useAppSelector(state => state.user);
+
+  const logOut = () => {
     signOut(auth);
     dispatch(userSignOut());
-    navigate('/login');
+    navigate(PublicRoutes.LOGIN);
   };
 
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
   const handleCloseNavMenu = (link: string) => {
     setAnchorElNav(null);
-    navigate(link)
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+    navigate(link);
   };
 
   return (
@@ -66,7 +60,6 @@ export const Navbar = () => {
           >
             ECOMENJA
           </Typography>
-
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -76,7 +69,7 @@ export const Navbar = () => {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              E
+              RESPONSIVE
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -132,43 +125,18 @@ export const Navbar = () => {
                 {page.title}
               </Button>
             ))}
-            <Link to="/checkout">
+            <Link to="/cart">
               <IconButton>
                 <BsFillCartFill style={{ color: "white" }} />
               </IconButton>
             </Link>
           </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-              <Button variant="contained" color="inherit" onClick={logout}>Logout</Button>
-            </Menu>
-          </Box>
+          {
+            user.email ?
+              <Button variant="contained" onClick={logOut}>Sign Out</Button>
+              :
+              <Button variant="contained" onClick={() => navigate(PublicRoutes.LOGIN)}>Sign In</Button>
+          }
         </Toolbar>
       </Container>
     </AppBar>

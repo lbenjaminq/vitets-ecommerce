@@ -17,7 +17,7 @@ export const Search = () => {
     e.preventDefault();
     dispatch(getProductSearchAction(productInput));
     setInputProduct('');
-  }
+  };
 
   return (
     <FormControl sx={{ width: '25ch', display: "flex" }}>

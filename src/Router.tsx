@@ -1,25 +1,29 @@
-import { lazy, Suspense } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { lazy } from 'react';
+import { Route } from 'react-router-dom';
+import { AuthGuard } from './guards';
+import { PrivateRoutes, PublicRoutes } from './models/routes';
 import { RouterLayout } from './RouterLayout';
-const Main = lazy(() => import('./pages/Main/Main'))
-const Home = lazy(() => import('./pages/Home/Home'))
-const Checkout = lazy(() => import('./pages/Checkout/Checkout'))
-const CardDetail = lazy(() => import('./pages/CardDetail/CardDetail'))
-const Login = lazy(() => import('./pages/Login/Login'))
-
+import { RouteWithNotFound } from './utilities';
+const Main = lazy(() => import('./pages/Main/Main'));
+const Home = lazy(() => import('./pages/Home/Home'));
+const Checkout = lazy(() => import('./pages/Checkout/Checkout'));
+const CardDetail = lazy(() => import('./pages/CardDetail/CardDetail'));
+const Login = lazy(() => import('./pages/Login/Login'));
 
 export const AppRouter: React.FC = () => {
+
   return (
-    <Suspense fallback={<h1>Still Loading…</h1>}>
-      <Routes>
-        <Route path="/" element={<RouterLayout />}>
-          <Route path="/" element={<Main />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/detail/:id" element={<CardDetail />} />
-        </Route>
-        <Route path="/login" element={<Login />} />
-      </Routes>
-    </Suspense>
+    <RouteWithNotFound>
+      <Route element={<AuthGuard />}>
+        <Route path={PrivateRoutes.DASHBOARD} element={<><h1>DASHBOARD</h1></>} />
+      </Route>
+      <Route path="/" element={<RouterLayout />}>
+        <Route path={PublicRoutes.MAIN} element={<Main />} />
+        <Route path={PublicRoutes.HOME} element={<Home />} />
+        <Route path={PublicRoutes.CART} element={<Checkout />} />
+        <Route path={PublicRoutes.CARD_DETAIL} element={<CardDetail />} />
+      </Route>
+      <Route path={PublicRoutes.LOGIN} element={<Login />} />
+    </RouteWithNotFound>
   );
 };

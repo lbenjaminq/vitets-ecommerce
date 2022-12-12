@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { userActive } from '../../redux/slices/user.slice';
 import { setItem } from '../../utilities/useLocalStorage';
+import { PublicRoutes } from '@/models/routes';
 
 const initialState = {
   email: "",
@@ -48,7 +49,7 @@ export const Login = () => {
         if (email && uid) {
           dispatch(userActive({ email, uid }))
         }
-        navigate('/')
+        navigate(PublicRoutes.MAIN)
       })
       .catch((error) => {
         console.log(error.message);

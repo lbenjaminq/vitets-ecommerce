@@ -1,12 +1,12 @@
 import React from 'react';
-import { Container, Grid, Box, Typography, TextField, Button, CssBaseline, Avatar, FormControlLabel, Checkbox, Link, Stack } from '@mui/material';
+import { Container, Grid, Box, Typography, TextField, Button, CssBaseline, Avatar, Link, Stack } from '@mui/material';
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from '@/config/firebase';
 import { useNavigate } from 'react-router';
 import { useAppDispatch } from '@/redux';
 import { userActive } from '@/redux/slices/user.slice';
 import { CgCopyright } from 'react-icons/cg';
-
+import { PublicRoutes } from '@/models/routes';
 
 interface Props {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -30,11 +30,11 @@ export const FormLogin: React.FC<Props> = ({ handleChange, handleLogin, handleOp
         if (email && uid) {
           dispatch(userActive({ email, uid }))
         }
-        navigate('/')
+        navigate(PublicRoutes.MAIN)
       }).catch((error) => {
         console.log(error.message);
       });
-  }
+  };
 
   return (
     <Container component="main" maxWidth="xs">

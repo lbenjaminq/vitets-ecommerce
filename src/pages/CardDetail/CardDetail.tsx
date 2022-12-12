@@ -31,7 +31,7 @@ const CardDetail = () => {
   useEffect(() => {
     if (product) {
       dispatch(getProductByCategory(product.category));
-    }
+    };
   }, [product]);
 
   if (!product) return <>Loading</>
