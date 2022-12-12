@@ -14,7 +14,6 @@ import {
   Link,
 } from '@mui/material';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { UserAccount } from '@/types/types';
 import { CgCopyright } from 'react-icons/cg';
@@ -30,9 +29,6 @@ export const FormRegister: React.FC<Props> = ({
   handleClose,
 }) => {
   const auth = getAuth();
-  const navigate = useNavigate();
-
-
   const [newAccount, setNewAccount] = React.useState<UserAccount>({
     email: "",
     password: "",
@@ -50,7 +46,7 @@ export const FormRegister: React.FC<Props> = ({
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, newAccount.email, newAccount.password)
-      .then((auths) => {
+      .then(() => {
         window.location.reload()
       })
       .catch((error) => console.log(error.message));

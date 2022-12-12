@@ -14,7 +14,7 @@ import { RiLuggageCartLine } from 'react-icons/ri';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { addToCartProduct } from '@/utilities';
 
-export const CardDetail = () => {
+const CardDetail = () => {
 
   const { id } = useParams();
   const dispatch = useAppDispatch();
@@ -173,3 +173,5 @@ const StackProduct = {
 const SizeMedium = {
   fontSize: "2rem"
 }
+
+export default CardDetail;

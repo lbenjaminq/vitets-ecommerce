@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { userActive } from '../../redux/slices/user.slice';
 import { setItem } from '../../utilities/useLocalStorage';
-import { ContainerLayout } from '@/styled-components/ContainerLayout';
 
 const initialState = {
   email: "",
@@ -64,3 +63,5 @@ export const Login = () => {
     </div>
   )
 }
+
+export default Login;
