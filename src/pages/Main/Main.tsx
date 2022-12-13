@@ -9,6 +9,7 @@ export const Main = () => {
         <Rows category="smartphones" />
         <Rows category="laptops" />
         <Rows category="skincare" />
+        <Rows category="tops" />
       </ContainerLayout>
       <Footer />
     </div>

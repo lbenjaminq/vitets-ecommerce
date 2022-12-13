@@ -24,13 +24,13 @@ export const Rows: React.FC<Props> = ({ category }) => {
   }, [category]);
 
   return (
-    <Box sx={{ margin: { xs: "10%", sm: "4%" } }}>
+    <Box sx={{ margin: { xs: "8%", sm: "2%" } }}>
       {
         loading ?
           <Typography>Cargando</Typography>
           :
           <>
-            <Typography sx={{ fontSize: "2rem" }} color="secondary">{category.toUpperCase()}</Typography>
+            <Typography sx={{ fontSize: "2rem" }} >{category.toUpperCase()}</Typography>
             <Slider {...Settings} className="SliderRow">
               {
                 products?.map((product) => (

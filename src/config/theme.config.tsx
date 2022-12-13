@@ -6,7 +6,7 @@ type ThemeProp = {
 };
 
 enum themePalette {
-  BG = "#1b262c",
+  BG = "#EBEBEB",
   BLUE = "rgba(29,221,255,0.9)",
   BLUE_LIGHT = "rgba(137,237,255,1)",
   WHITE = "#FFFFFF",

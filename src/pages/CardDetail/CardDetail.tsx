@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { settings } from '@/config/react-slick';
 import { CardProduct } from '@/components';
-import { Stack, Box, Typography, Container, Button, TextField } from '@mui/material';
+import { Stack, Box, Typography, Container, Button, TextField, Divider } from '@mui/material';
 import { cleanState } from '@/redux/slices/products.slice';
 import Slider from 'react-slick';
 import style from './CardDetail.module.css';
