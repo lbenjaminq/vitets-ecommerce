@@ -41,20 +41,20 @@ export const Cart = () => {
           ))
         }
       </Box>
-      <Box component='div' sx={{ width: "35%", height: "500px", display: "flex", alignItems: "center", justifyContent: "center", position: "sticky", top: "0" }}>
-        <Paper elevation={3} sx={{ height: "80%", width: "80%", backgroundColor: "#fff" }}>
-          <Typography variant="h4" sx={{ margin: "4%" }}>PRICE DETAILS</Typography>
+      <Box component='div' sx={{ width: { xs: "100%", sm: "100%", md: "35%" }, height: "400px", display: "flex", alignItems: "center", justifyContent: "center", position: "sticky", top: "0" }}>
+        <Paper elevation={3} sx={{ height: { xs: "100%", sm: "100%", md: "80%" }, width: "80%", backgroundColor: "#fff", padding: "30px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+          <Typography variant="h4" >PRICE DETAILS</Typography>
           <SDivider />
-          <Stack direction='row' justifyContent='space-between' ml={4} mr={4} mt={5} mb={5}>
+          <Stack direction='row' justifyContent='space-between' >
             <Typography variant="h5">Products Amount</Typography>
             <Typography variant="h5">{products.length}</Typography>
           </Stack>
-          <Stack direction='row' justifyContent='space-between' ml={4} mr={4} mt={5} mb={5}>
+          <Stack direction='row' justifyContent='space-between' >
             <Typography variant="h5">Delivery Charges</Typography>
             <Typography variant="h5">Free</Typography>
           </Stack>
           <SDivider />
-          <Stack direction='row' justifyContent='space-between' ml={4} mr={4} mt={5}>
+          <Stack direction='row' justifyContent='space-between' >
             <Typography variant="h5">Total Amount</Typography>
             <Typography variant="h5">${sumTotal(products)}</Typography>
           </Stack>
