@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router';
+import { useEffect } from 'react';
+import { useParams } from 'react-router';
 import { settings } from '@/config/react-slick';
 import { CardProduct, Footer } from '@/components';
 import { Stack, Box, Typography, Container, Button, TextField, Divider } from '@mui/material';
@@ -13,18 +13,15 @@ import { TbBus, TbListDetails } from 'react-icons/tb';
 import { RiLuggageCartLine } from 'react-icons/ri';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { addToCartProduct } from '@/utilities';
-import { AiOutlineRollback } from 'react-icons/ai'
+import { AiOutlineRollback } from 'react-icons/ai';
 import { PublicRoutes } from '@/models';
 
 const CardDetail = () => {
 
   const { id } = useParams();
-  const navigate = useNavigate()
   const dispatch = useAppDispatch();
   const product = useAppSelector(state => state.products.productDetail);
   const similarProducts = useAppSelector(state => state.products.products);
-
-  const handleClickBack = () => navigate(PublicRoutes.MAIN);
 
   useEffect(() => {
     if (id) {
@@ -44,10 +41,9 @@ const CardDetail = () => {
   return (
     <Container maxWidth={false}>
       <Box sx={BoxContainer}>
-        <Button sx={{ position: "absolute", top: "0", left: "0" }} onClick={handleClickBack}>
+        <a href={PublicRoutes.MAIN} style={{ position: "absolute", top: "0", left: "10px", color: "black" }} >
           <AiOutlineRollback style={{ fontSize: "2rem" }} />
-        </Button>
-        <Stack sx={StackImg}>
+        </a>       <Stack sx={StackImg}>
           <LazyLoadImage src={product?.thumbnail} className={style.imageProduct} />
         </Stack>
         <Stack
@@ -149,19 +145,17 @@ const CardDetail = () => {
       <Footer />
     </Container>
   )
-}
-
+};
 
 const BoxContainer = {
   display: "flex",
   flexDirection: { xs: "column", lg: "row" },
   justifyContent: "space-evenly",
-  alignItems: "center",
   marginBottom: "5%",
   backgroundColor: "#a5a5a5",
   position: "relative",
   padding: "2%"
-}
+};
 
 const StackImg = {
   width: { xs: "100%", sm: "100%", md: "100%", lg: "50%" },
@@ -169,8 +163,9 @@ const StackImg = {
   backgroundColor: { xs: "none", lg: "#fff" },
   position: { sm: "relative", md: "sticky" },
   top: { md: "none", lg: "0px" },
-  height: { xs: "50vh", sm: "70vh", md: "90vh" }
-}
+  height: { xs: "50vh", sm: "70vh", md: "90vh" },
+  marginTop: "2%"
+};
 
 const StackProduct = {
   backgroundColor: "#f5f5f5",
@@ -178,10 +173,10 @@ const StackProduct = {
   width: { xs: "100%", md: "100%", lg: "40%" },
   height: "fit-content",
   marginTop: "2%"
-}
+};
 
 const SizeMedium = {
   fontSize: "2rem"
-}
+};
 
 export default CardDetail;
