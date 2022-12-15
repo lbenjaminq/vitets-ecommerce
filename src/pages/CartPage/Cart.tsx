@@ -1,14 +1,13 @@
-import { sumTotal } from '@/utilities/sumTotal';
 import { useAppDispatch, useAppSelector } from '@/redux';
 import { addToCart, removeToCart } from '@/redux/slices/cart.slice';
 import { CartProduct } from '@/types/types';
-import { Typography, Box, Paper, Container, Stack } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import { useEffect } from 'react';
-import { setItem, sumTotalProducts } from '@/utilities';
-import { SDivider } from '@/styled-components/Divider';
-import { CartProductCard } from '../Product';
+import { setItem } from '@/utilities';
+import { CartProductCard } from '../../components/Product';
 import { AiOutlineRollback } from 'react-icons/ai';
 import { PublicRoutes } from '@/models';
+import { PaperSummary } from './components/PaperSummary/PaperSummary';
 
 export const Cart = () => {
   const dispatch = useAppDispatch();
@@ -25,7 +24,6 @@ export const Cart = () => {
   const removeToCartProduct = (item: CartProduct) => {
     dispatch(removeToCart(item));
   };
-
 
   if (!products.length) return <h1 style={{ color: "black" }}>No products</h1>;
 
@@ -47,27 +45,9 @@ export const Cart = () => {
           ))
         }
       </Box>
-      <Box component='div' sx={{ width: { xs: "100%", sm: "100%", md: "35%" }, height: "400px", display: "flex", alignItems: "center", justifyContent: "center", position: "sticky", top: "0" }}>
-        <Paper elevation={3} sx={{ height: { xs: "100%", sm: "100%", md: "80%" }, width: "80%", backgroundColor: "#fff", padding: "30px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-          <Typography variant="h4" >PRICE DETAILS</Typography>
-          <SDivider />
-          <Stack direction='row' justifyContent='space-between' >
-            <Typography variant="h5">Products Amount</Typography>
-            <Typography variant="h5">{sumTotalProducts(products)}</Typography>
-          </Stack>
-          <Stack direction='row' justifyContent='space-between' >
-            <Typography variant="h5">Delivery Charges</Typography>
-            <Typography variant="h5">Free</Typography>
-          </Stack>
-          <SDivider />
-          <Stack direction='row' justifyContent='space-between' >
-            <Typography variant="h5">Total Amount</Typography>
-            <Typography variant="h5">${sumTotal(products)}</Typography>
-          </Stack>
-        </Paper>
-      </Box>
+      <PaperSummary products={products} />
     </Container>
-
   );
 }
 
+export default Cart;

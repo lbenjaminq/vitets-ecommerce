@@ -1,3 +1,27 @@
+export function SampleNextArrow(props: any) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "none", background: "red" }
+      }
+      onClick={onClick}
+    />
+  );
+}
+
+export function SamplePrevArrow(props: any) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "none", background: "green" }
+      }
+      onClick={onClick}
+    />
+  );
+}
+
 export const settings = {
   infinite: false,
   speed: 700,
@@ -72,4 +96,6 @@ export const settingsSlider = {
   slidesToScroll: 1,
   autoplay: true,
   autoplaySpeed: 4000,
+  nextArrow: <SampleNextArrow />,
+  prevArrow: <SamplePrevArrow />
 };
