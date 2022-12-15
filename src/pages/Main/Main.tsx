@@ -1,5 +1,6 @@
-import { Footer, Rows, SliderComponent } from '@/components';
+import { Footer } from '@/components';
 import { ContainerLayout } from '@/styled-components/ContainerLayout';
+import { Rows, SliderComponent } from './components';
 
 export const Main = () => {
   return (

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Container, Typography } from '@mui/material';
 import { api } from '@/api';
-import { CardProduct } from '../Product';
+import { CardProduct } from '../../../../components/Product';
 import { Product } from '@/types/types';
 import Slider from "react-slick";
 import "./Rows.css";

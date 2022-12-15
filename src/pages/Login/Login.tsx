@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { FormLogin, FormRegister } from '../../components';
 import {
   signInWithEmailAndPassword,
   getAuth
@@ -10,6 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { userActive } from '../../redux/slices/user.slice';
 import { setItem } from '../../utilities/useLocalStorage';
 import { PublicRoutes } from '@/models/routes';
+import { FormLogin, FormRegister } from './components';
 
 const initialState = {
   email: "",

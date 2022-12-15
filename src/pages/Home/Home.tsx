@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { Button, Container, Grid, Stack } from '@mui/material';
 import { getProductAction, useAppDispatch, useAppSelector } from '@/redux';
 import { cleanState } from '@/redux/slices/products.slice';
-import { CardProduct, FilterCategory, FilterPrice, Search } from '@/components';
+import { CardProduct } from '@/components';
+import { FilterCategory, FilterPrice, Search } from './components';
 
 export const Home = () => {
   const dispatch = useAppDispatch();
