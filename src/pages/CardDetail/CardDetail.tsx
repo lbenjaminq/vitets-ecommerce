@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { settings } from '@/config/react-slick';
-import { CardProduct } from '@/components';
+import { CardProduct, Footer } from '@/components';
 import { Stack, Box, Typography, Container, Button, TextField, Divider } from '@mui/material';
 import { cleanState } from '@/redux/slices/products.slice';
 import Slider from 'react-slick';
@@ -13,13 +13,18 @@ import { TbBus, TbListDetails } from 'react-icons/tb';
 import { RiLuggageCartLine } from 'react-icons/ri';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { addToCartProduct } from '@/utilities';
+import { AiOutlineRollback } from 'react-icons/ai'
+import { PublicRoutes } from '@/models';
 
 const CardDetail = () => {
 
   const { id } = useParams();
+  const navigate = useNavigate()
   const dispatch = useAppDispatch();
   const product = useAppSelector(state => state.products.productDetail);
   const similarProducts = useAppSelector(state => state.products.products);
+
+  const handleClickBack = () => navigate(PublicRoutes.MAIN);
 
   useEffect(() => {
     if (id) {
@@ -39,6 +44,9 @@ const CardDetail = () => {
   return (
     <Container maxWidth={false}>
       <Box sx={BoxContainer}>
+        <Button sx={{ position: "absolute", top: "0", left: "0" }} onClick={handleClickBack}>
+          <AiOutlineRollback style={{ fontSize: "2rem" }} />
+        </Button>
         <Stack sx={StackImg}>
           <LazyLoadImage src={product?.thumbnail} className={style.imageProduct} />
         </Stack>
@@ -127,7 +135,7 @@ const CardDetail = () => {
         </Typography>
         {
           similarProducts.length &&
-          <Box sx={{ margin: "auto", width: "80%" }}>
+          <Box sx={{ margin: "auto", width: "80%", marginBottom: "6%" }}>
             <Slider {...settings} >
               {
                 similarProducts?.map(product => (
@@ -138,6 +146,7 @@ const CardDetail = () => {
           </Box>
         }
       </Box>
+      <Footer />
     </Container>
   )
 }
@@ -150,16 +159,17 @@ const BoxContainer = {
   alignItems: "center",
   marginBottom: "5%",
   backgroundColor: "#a5a5a5",
-  position: "relative"
+  position: "relative",
+  padding: "2%"
 }
 
 const StackImg = {
-  width: { md: "70%", lg: "40%" },
+  width: { xs: "100%", sm: "100%", md: "100%", lg: "50%" },
   display: "flex",
-  backgroundColor: "#fff",
+  backgroundColor: { xs: "none", lg: "#fff" },
   position: { sm: "relative", md: "sticky" },
   top: { md: "none", lg: "0px" },
-  height: "90vh"
+  height: { xs: "50vh", sm: "70vh", md: "90vh" }
 }
 
 const StackProduct = {

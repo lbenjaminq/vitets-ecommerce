@@ -10,15 +10,21 @@
   margin: auto;
 }
 
+@media screen and (max-width: 1200px) {
+  .imageProduct {
+    width: 100%;
+  }
+}
+
 @media screen and (max-width: 500px) {
-  .img {
+  .imageProduct {
     width: 100%;
   }
 }
 
 @media screen and (max-width: 900px) {
   .imageProduct {
-    width: 60%;
-    height: 60%;
+    width: 80%;
+    height: 80%;
   }
 }

@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 import { AuthGuard } from './guards';
 import { PrivateRoutes, PublicRoutes } from './models/routes';
 import { RouterLayout } from './RouterLayout';
-import { RouteWithNotFound } from './utilities';
+import RouteWithNotFound from './utilities/routeWithNotFound';
 const Main = lazy(() => import('./pages/Main/Main'));
 const Home = lazy(() => import('./pages/Home/Home'));
 const Checkout = lazy(() => import('./pages/Checkout/Checkout'));
