@@ -1,6 +1,6 @@
 export * from './CardDetail';
 export * from './CartPage/components/PaperSummary';
-export * from './CartPage/components/PaypalButton';
+export * from '../components/PaypalButton';
 export * from './CartPage/components';
 export * from './CartPage';
 export * from './Home/components/Filters';

@@ -7,5 +7,6 @@ export const PublicRoutes = {
   MAIN: '/',
   HOME: '/home',
   CART: '/cart',
+  CHECKOUT: '/checkout',
   CARD_DETAIL: '/detail/:id'
 };

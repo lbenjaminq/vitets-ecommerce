@@ -1,3 +1,3 @@
 export * from './PaperSummary';
-export * from './PaypalButton';
+export * from '../../../components/PaypalButton';
 export * from './index';

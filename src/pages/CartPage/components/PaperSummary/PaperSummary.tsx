@@ -1,14 +1,17 @@
+import { PublicRoutes } from "@/models";
 import { SDivider } from "@/styled-components/Divider"
 import { CartProduct } from "@/types/types";
 import { sumTotal, sumTotalProducts } from "@/utilities"
-import { Box, Paper, Stack, Typography } from "@mui/material"
-import PaypalButton from "../PaypalButton/PaypalButton";
+import { Box, Button, Paper, Stack, Typography } from "@mui/material"
+import { useNavigate } from "react-router";
 
 interface Props {
   products: CartProduct[]
 }
 
 export const PaperSummary = ({ products }: Props) => {
+
+  const navigate = useNavigate()
 
   return (
     <Box component='div' sx={{ width: { xs: "100%", sm: "100%", md: "35%" }, height: "400px", display: "flex", alignItems: "center", justifyContent: "center", position: "sticky", top: "0" }}>
@@ -28,7 +31,7 @@ export const PaperSummary = ({ products }: Props) => {
           <Typography variant="h5">Total Amount</Typography>
           <Typography variant="h5">${sumTotal(products)}</Typography>
         </Stack>
-        <PaypalButton />
+        <Button variant='contained' fullWidth onClick={() => navigate(PublicRoutes.CHECKOUT)}>Checkout</Button>
       </Paper>
     </Box>
   )

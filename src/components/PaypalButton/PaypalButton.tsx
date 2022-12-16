@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { sumTotal } from '@/utilities';
 import { useAppSelector } from '@/redux';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
@@ -11,6 +11,11 @@ export default function PaypalButton() {
   const [success, setSuccess] = useState(false);
   const [ErrorMessage, setErrorMessage] = useState("");
   const [orderID, setOrderID] = useState(false);
+  const [price, setPrice] = useState(0)
+
+  useEffect(() => {
+    setPrice(sumTotal(products))
+  }, [products])
 
   const createOrder = (data: any, actions: any) => {
     return actions.order
@@ -20,7 +25,7 @@ export default function PaypalButton() {
             description: "Sunflower",
             amount: {
               currency_code: "USD",
-              value: sumTotal(products),
+              value: price,
             },
           },
         ],
