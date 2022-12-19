@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AddressForm, PaymentForm, Review } from './components';
 import { useAddresContext } from './context/context';
+import { PaypalButton } from '../CartPage';
 
 function Copyright() {
   return (
@@ -101,7 +102,7 @@ export default function Checkout() {
           ) : (
             <React.Fragment>
               {getStepContent(activeStep)}
-              <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <Box sx={{ display: 'flex', flexDirection: { xs: "column", sm: "row" }, justifyContent: 'center' }}>
                 {activeStep !== 0 && (
                   <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
                     Back
@@ -112,7 +113,7 @@ export default function Checkout() {
                   onClick={handleNext}
                   sx={{ mt: 3, ml: 1 }}
                 >
-                  {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+                  {activeStep === steps.length - 1 ? <PaypalButton /> : 'Next'}
                 </Button>
               </Box>
             </React.Fragment>

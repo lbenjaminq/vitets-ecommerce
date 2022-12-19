@@ -1,4 +1,4 @@
-import { Box, AppBar, Toolbar, Typography, Button, IconButton, Menu, MenuItem } from '@mui/material';
+import { Box, AppBar, Toolbar, Typography, Button, IconButton, Menu, MenuItem, SwipeableDrawer, Drawer } from '@mui/material';
 import { BsFillCartFill } from 'react-icons/bs';
 import { Link, useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
@@ -8,6 +8,8 @@ import { auth } from '@/config/firebase';
 import { Container } from '@mui/system';
 import { useState } from 'react';
 import { PublicRoutes } from '@/models/routes';
+import { AiOutlineMenuUnfold } from 'react-icons/ai';
+import { Lists } from './Lists';
 
 interface Pages {
   title: string;
@@ -28,15 +30,14 @@ export const Navbar = () => {
     navigate(PublicRoutes.LOGIN);
   };
 
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [open, setOpen] = useState(false);
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
+  const handleOpen = () => {
+    setOpen(true);
   };
 
-  const handleCloseNavMenu = (link: string) => {
-    setAnchorElNav(null);
-    navigate(link);
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
@@ -50,7 +51,7 @@ export const Navbar = () => {
             href="/"
             sx={{
               mr: 2,
-              display: { xs: 'none', md: 'flex' },
+              display: { xs: 'none', sm: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
@@ -60,18 +61,18 @@ export const Navbar = () => {
           >
             ECOMENJA
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', sm: 'none' } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={handleOpenNavMenu}
+              onClick={handleOpen}
               color="inherit"
             >
-              RESPONSIVE
+              <AiOutlineMenuUnfold />
             </IconButton>
-            <Menu
+            {/* <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
@@ -94,42 +95,30 @@ export const Navbar = () => {
                   <Typography textAlign="center">{page.title}</Typography>
                 </MenuItem>
               ))}
-            </Menu>
+            </Menu> */}
+            <Drawer
+              onClose={handleClose}
+              anchor="left"
+              open={open}
+            >
+              <Lists />
+            </Drawer>
           </Box>
-          {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, alignItems: "center" }}>
+          <Link to="/cart">
+            <IconButton>
+              <BsFillCartFill style={{ color: "white" }} />
+            </IconButton>
+          </Link>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'flex' }, alignItems: "center" }}>
             {pages.map((page) => (
               <Button
                 key={page.title}
-                onClick={() => handleCloseNavMenu(page.link)}
+                onClick={() => navigate(page.link)}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page.title}
               </Button>
             ))}
-            <Link to="/cart">
-              <IconButton>
-                <BsFillCartFill style={{ color: "white" }} />
-              </IconButton>
-            </Link>
           </Box>
           {
             user.email ?
