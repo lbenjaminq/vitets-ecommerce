@@ -17,7 +17,7 @@ interface Pages {
   link: string;
 };
 
-const pages: Pages[] = [{ title: 'Search', link: "/home" }, { title: 'Pricing', link: "" }, { title: 'Blog', link: "" }];
+const pages: Pages[] = [{ title: 'Search', link: "/home" }, { title: 'Contact Us', link: "" }, { title: 'Work with Us', link: "" }];
 
 export const Navbar = () => {
   const navigate = useNavigate();

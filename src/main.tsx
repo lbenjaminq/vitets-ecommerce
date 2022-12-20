@@ -9,7 +9,7 @@ import { Suspense } from 'react';
 
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-    <Suspense fallback={<h1>Loading…</h1>}>
+    <Suspense fallback={<></>}>
         <Provider store={store}>
             <ThemeConfig>
                 <App />
