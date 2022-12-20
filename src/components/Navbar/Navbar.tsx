@@ -1,6 +1,6 @@
-import { Box, AppBar, Toolbar, Typography, Button, IconButton, Menu, MenuItem, SwipeableDrawer, Drawer } from '@mui/material';
+import { Box, AppBar, Toolbar, Typography, Button, IconButton, Link, Drawer } from '@mui/material';
 import { BsFillCartFill } from 'react-icons/bs';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { useAppDispatch, useAppSelector } from '@/redux';
 import { userSignOut } from '@/redux/slices/user.slice';
@@ -8,6 +8,7 @@ import { auth } from '@/config/firebase';
 import { Container } from '@mui/system';
 import { useState } from 'react';
 import { PublicRoutes } from '@/models/routes';
+import { RiHomeSmileFill } from 'react-icons/ri'
 import { AiOutlineMenuUnfold } from 'react-icons/ai';
 import { Lists } from './Lists';
 
@@ -72,30 +73,6 @@ export const Navbar = () => {
             >
               <AiOutlineMenuUnfold />
             </IconButton>
-            {/* <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page.title} onClick={() => handleCloseNavMenu(page.link)}>
-                  <Typography textAlign="center">{page.title}</Typography>
-                </MenuItem>
-              ))}
-            </Menu> */}
             <Drawer
               onClose={handleClose}
               anchor="left"
@@ -104,7 +81,12 @@ export const Navbar = () => {
               <Lists />
             </Drawer>
           </Box>
-          <Link to="/cart">
+          <Link href="/" sx={{ display: { xs: "inline", sm: "none" } }}>
+            <IconButton>
+              <RiHomeSmileFill style={{ color: "white" }} />
+            </IconButton>
+          </Link>
+          <Link href="/cart">
             <IconButton>
               <BsFillCartFill style={{ color: "white" }} />
             </IconButton>
