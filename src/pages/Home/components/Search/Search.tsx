@@ -20,7 +20,7 @@ export const Search = () => {
   };
 
   return (
-    <FormControl sx={{ width: '25ch', display: "flex" }}>
+    <FormControl sx={{ width: { xs: "18ch", sm: "25ch" }, display: "flex" }}>
       <Stack direction="row" alignItems="center">
         <OutlinedInput sx={{ color: "black", background: "white" }} color="secondary" placeholder="Search.." onChange={handleChange} value={productInput} />
         <CgSearchLoading onClick={handleOnClick} color="white"

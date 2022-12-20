@@ -28,20 +28,25 @@ export const Home = () => {
 
   return (
     <Container maxWidth="xl" sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-      <Stack direction="row" spacing={12} sx={{ marginTop: "20px" }}>
-        <Search />
-        <FilterPrice price={price} setPrice={setPrice} />
-        <FilterCategory categorySelected={categorySelected} setCategorySelected={setCategorySelected} />
-        <Button variant="contained" color="primary" onClick={handleReset}>reset filters</Button>
+      <Stack direction="row" spacing={{ xs: "10px", md: "60px" }} sx={{ marginTop: "20px" }}>
+        <Stack spacing={{ xs: "10px", md: "60px" }} direction={{ sm: "column", md: "row" }}>
+          <Search />
+          <FilterPrice price={price} setPrice={setPrice} />
+        </Stack>
+        <Stack spacing={{ xs: "10px", md: "60px" }} direction={{ sm: "column", md: "row" }}>
+          <FilterCategory categorySelected={categorySelected} setCategorySelected={setCategorySelected} />
+          <Button variant="contained" color="primary" onClick={handleReset}>reset filters</Button>
+        </Stack>
       </Stack>
       <Grid
         container
         spacing={4}
-        sx={{ margin: "auto", justifyContent: "center" }}
+        mt={4}
+        justifyContent="center"
         wrap={'wrap'}
       >
         {products?.map((product) => (
-          <Grid key={product.id} item >
+          <Grid item key={product.id} xs={12} sm={6} md={6} lg={4}>
             <CardProduct product={product} />
           </Grid>
         ))}
