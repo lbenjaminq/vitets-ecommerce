@@ -123,7 +123,6 @@ const CardDetail = () => {
       <Box sx={{ marginBottom: "2%" }}>
         <Typography sx={{
           fontSize: "2rem",
-          color: "#fff",
           textAlign: "center",
           margin: "2%"
         }}
