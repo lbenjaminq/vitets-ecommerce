@@ -16,7 +16,7 @@ import { useDispatch } from 'react-redux';
 import { useAppSelector } from '@/redux';
 import { Product } from '@/types/types';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { addToCartProduct } from '@/utilities';
+import { addToCartProduct, setItem } from '@/utilities';
 
 interface Props {
   product: Product;
@@ -28,6 +28,9 @@ export const CardProduct: React.FC<Props> = ({ product }) => {
 
   const [disabledBtn, setdisabledBtn] = useState(false);
 
+  useEffect(() => {
+    setItem('cart', productsCart);
+  }, [productsCart]);
 
   useEffect(() => {
     setdisabledBtn(productsCart.some((item) => item.id === product.id));

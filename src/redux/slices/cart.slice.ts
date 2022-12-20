@@ -10,6 +10,7 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<CartProduct>) => {
+      console.log("andando")
       const { title, brand, id, thumbnail, price, stock, amount } = action.payload;
       const itemFind = state.find((item) => item.id === id)
       if (itemFind) {
