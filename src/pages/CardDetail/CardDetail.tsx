@@ -6,7 +6,7 @@ import { Stack, Box, Typography, Container, Button, TextField, Divider } from '@
 import { cleanState } from '@/redux/slices/products.slice';
 import Slider from 'react-slick';
 import style from './CardDetail.module.css';
-import { getProductByCategory, getProductByIdAction, useAppDispatch, useAppSelector } from '@/redux';
+import { getProductByCategory, useAppDispatch, useAppSelector } from '@/redux';
 import { SDivider } from '@/styled-components/Divider';
 import { TiStar } from 'react-icons/ti';
 import { TbBus, TbListDetails } from 'react-icons/tb';
@@ -15,6 +15,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { addToCartProduct } from '@/utilities';
 import { AiOutlineRollback } from 'react-icons/ai';
 import { PublicRoutes } from '@/models';
+import { api } from '@/api';
 
 const CardDetail = () => {
 
@@ -25,7 +26,7 @@ const CardDetail = () => {
 
   useEffect(() => {
     if (id) {
-      dispatch(getProductByIdAction(id));
+      dispatch(api.getProductById(id));
     };
     return () => { dispatch(cleanState()) };
   }, [dispatch, id]);

@@ -1,21 +1,24 @@
+import { getProduct, getProductById, getProductBySearch } from '@/redux/slices/products.slice';
 import axios from 'axios';
-import { Product } from '../types/types';
 
 const BASE_URL = "https://dummyjson.com";
 
 const api = {
-  allProducts: async (): Promise<Product[]> => {
-    const request = await axios(
-      `${BASE_URL}/products`);
-    return request.data.products;
+  allProducts: () => async (dispatch: any) => {
+    await axios(
+      `${BASE_URL}/products`)
+      .then((data) => dispatch(getProduct(data.data.products)))
+      .catch((err) => console.log(err));
   },
-  getProductById: async (id: string): Promise<Product> => {
-    const request = await axios(`${BASE_URL}/products/${id}`);
-    return request.data;
+  getProductById: (id: string) => async (dispatch: any) => {
+    await axios(`${BASE_URL}/products/${id}`)
+      .then((data) => dispatch(getProductById(data.data)))
+      .catch((err) => console.log(err));
   },
-  getProductBySearch: async (product: string): Promise<Product> => {
-    const request = await axios(`${BASE_URL}/products/search?q=${product}`);
-    return request.data.products;
+  getProductBySearch: (product: string) => async (dispatch: any) => {
+    await axios(`${BASE_URL}/products/search?q=${product}`)
+      .then((data) => dispatch(getProductBySearch(data.data.products)))
+      .catch((err) => console.log(err));
   },
   getAllCategories: async () => {
     const request = await axios(`${BASE_URL}/products/categories`);

@@ -1,4 +1,5 @@
-import { getProductSearchAction, useAppDispatch } from '@/redux';
+import { api } from '@/api';
+import { useAppDispatch } from '@/redux';
 import { FormControl, OutlinedInput, Stack } from '@mui/material';
 import { useState } from 'react';
 import { CgSearchLoading } from 'react-icons/cg';
@@ -10,12 +11,11 @@ export const Search = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputProduct(e.target.value);
-    console.log(e.target.value);
   };
 
   const handleOnClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    dispatch(getProductSearchAction(productInput));
+    dispatch(api.getProductBySearch(productInput));
     setInputProduct('');
   };
 
