@@ -61,7 +61,7 @@ export const Navbar = () => {
               textDecoration: 'none',
             }}
           >
-            Ecommerce
+            ECOMMERCE
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', sm: 'none' } }}>
             <IconButton
