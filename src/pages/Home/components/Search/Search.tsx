@@ -1,7 +1,7 @@
 import { api } from '@/api';
 import { useAppDispatch } from '@/redux';
 import { FormControl, OutlinedInput, Stack } from '@mui/material';
-import { useState } from 'react';
+import { FormEvent, FormEventHandler, useState } from 'react';
 import { CgSearchLoading } from 'react-icons/cg';
 
 
@@ -13,19 +13,19 @@ export const Search = () => {
     setInputProduct(e.target.value);
   };
 
-  const handleOnClick = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleOnClick = (event: FormEvent<HTMLFormElement>): void => {
+    event.preventDefault()
     dispatch(api.getProductBySearch(productInput));
     setInputProduct('');
   };
 
   return (
-    <FormControl sx={{ width: { xs: "18ch", sm: "25ch" }, display: "flex" }}>
+    <form onSubmit={handleOnClick}>
       <Stack direction="row" alignItems="center">
         <OutlinedInput sx={{ color: "black", background: "white" }} color="secondary" placeholder="Search.." onChange={handleChange} value={productInput} />
-        <CgSearchLoading onClick={handleOnClick} color="white"
+        <CgSearchLoading
           style={{ fontSize: "2rem", cursor: "pointer" }} />
       </Stack>
-    </FormControl>
+    </form>
   )
 }
