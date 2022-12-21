@@ -1,4 +1,4 @@
-import { Box, AppBar, Toolbar, Typography, Button, IconButton, Link, Drawer } from '@mui/material';
+import { Box, AppBar, Toolbar, Typography, Button, IconButton, Link, Drawer, Divider } from '@mui/material';
 import { BsFillCartFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
@@ -11,6 +11,7 @@ import { PublicRoutes } from '@/models/routes';
 import { RiHomeSmileFill } from 'react-icons/ri'
 import { AiOutlineMenuUnfold } from 'react-icons/ai';
 import { Lists } from './Lists';
+import { SDivider } from '@/styled-components/Divider';
 
 interface Pages {
   title: string;
@@ -60,7 +61,7 @@ export const Navbar = () => {
               textDecoration: 'none',
             }}
           >
-            ECOMENJA
+            Ecommerce
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', sm: 'none' } }}>
             <IconButton
@@ -76,8 +77,16 @@ export const Navbar = () => {
             <Drawer
               onClose={handleClose}
               anchor="left"
+              PaperProps={{
+                sx: {
+                  backgroundColor: "#332F30",
+                }
+              }}
               open={open}
+              sx={{ backgroundColor: "rgba(217,205,211,0.8)" }}
             >
+              <Typography component="a" href="/" variant="h4" mt={2} mb={2} ml={2} sx={{ textDecoration: "none", color: "#fff" }}>Ecommerce</Typography>
+              <SDivider />
               <Lists />
             </Drawer>
           </Box>
