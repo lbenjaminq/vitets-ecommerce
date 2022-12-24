@@ -27,7 +27,7 @@ export const Rows: React.FC<Props> = ({ category }) => {
     <Box sx={{ margin: { xs: "8%", sm: "2%" } }}>
       {
         loading ?
-          <Typography>Cargando</Typography>
+          <Typography>Loading</Typography>
           :
           <>
             <Typography sx={{ fontSize: "2rem" }} >{category.toUpperCase()}</Typography>
