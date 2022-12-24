@@ -10,8 +10,6 @@ export const Home = () => {
   const dispatch = useAppDispatch();
   const products = useAppSelector(state => state.products.products);
 
-  console.log(products)
-
   const [price, setPrice] = useState('');
   const [categorySelected, setCategorySelected] = useState('');
 

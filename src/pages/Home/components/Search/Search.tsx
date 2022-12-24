@@ -1,6 +1,6 @@
 import { api } from '@/api';
 import { useAppDispatch } from '@/redux';
-import { FormControl, OutlinedInput, Stack } from '@mui/material';
+import { FormControl, IconButton, OutlinedInput, Stack } from '@mui/material';
 import { FormEvent, FormEventHandler, useState } from 'react';
 import { CgSearchLoading } from 'react-icons/cg';
 
@@ -23,8 +23,10 @@ export const Search = () => {
     <form onSubmit={handleOnClick}>
       <Stack direction="row" alignItems="center">
         <OutlinedInput sx={{ color: "black", background: "white" }} color="secondary" placeholder="Search.." onChange={handleChange} value={productInput} />
-        <CgSearchLoading
-          style={{ fontSize: "2rem", cursor: "pointer" }} />
+        <IconButton type='submit'>
+          <CgSearchLoading
+            style={{ fontSize: "2rem", cursor: "pointer" }} />
+        </IconButton>
       </Stack>
     </form>
   )
